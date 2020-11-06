@@ -1,0 +1,8 @@
+.layout--four-column {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.layout--four-column > * {
+  flex: 0 1 25%;
+}

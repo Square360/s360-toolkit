@@ -1,0 +1,13 @@
+name: 'S360 Toolkit: Paragraphs'
+description: ''
+type: module
+package: 'S360 Toolkit'
+dependencies:
+  - drupal:paragraphs
+  - drupal:field_group
+  - drupal:media
+  - drupal:media_library
+  - drupal:views
+  - drupal:viewsreference
+  - drupal:webform
+core: 8.x

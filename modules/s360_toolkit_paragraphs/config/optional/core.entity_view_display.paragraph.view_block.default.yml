@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.view_block.field_vw_view
+    - paragraphs.paragraphs_type.view_block
+  module:
+    - viewsreference
+id: paragraph.view_block.default
+targetEntityType: paragraph
+bundle: view_block
+mode: default
+content:
+  field_vw_view:
+    weight: 0
+    label: above
+    settings:
+      plugin_types:
+        - block
+    third_party_settings: {  }
+    type: viewsreference_formatter
+    region: content
+hidden: {  }

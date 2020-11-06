@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - layout_paragraphs
+id: layout_section
+label: 'Layout Section'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins:
+  layout_paragraphs:
+    enabled: true
+    available_layouts:
+      s360_toolkit_layout_builder_onecol_section: 'One Column'
+      s360_toolkit_layout_builder_twocol_section: 'Two Column'
+      s360_toolkit_layout_builder_threecol_section: 'Three Column'
+      s360_toolkit_layout_builder_fourcol_section: 'Four Column'

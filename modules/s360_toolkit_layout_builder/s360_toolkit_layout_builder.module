@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * @file
+ * s360_tools_layouts.module
+ */
+
+/**
+ * Implements hook_layout_alter().
+ */
+function s360_toolkit_layout_builder_layout_alter(&$definitions) {
+  // Remove default layout from layout_builder module.
+  unset($definitions['layout_twocol_section']);
+  unset($definitions['layout_threecol_section']);
+  unset($definitions['layout_fourcol_section']);
+
+  // Remove default layout from layout_discovery module.
+  unset($definitions['layout_onecol']);
+  unset($definitions['layout_twocol']);
+  unset($definitions['layout_twocol_bricks']);
+  unset($definitions['layout_threecol_25_50_25']);
+  unset($definitions['layout_threecol_33_34_33']);
+}
+
+function s360_toolkit_layout_builder_page_attachments_alter(array &$attachments) {
+  if (\Drupal::service('router.admin_context')->isAdminRoute()) {
+    $attachments['#attached']['library'][] = 's360_toolkit_layout_builder/twocol_section';
+    $attachments['#attached']['library'][] = 's360_toolkit_layout_builder/threecol_section';
+    $attachments['#attached']['library'][] = 's360_toolkit_layout_builder/fourcol_section';
+  }
+}

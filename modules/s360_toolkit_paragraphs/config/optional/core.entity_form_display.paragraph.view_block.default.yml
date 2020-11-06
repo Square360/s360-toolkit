@@ -1,0 +1,76 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.view_block.field_vw_view
+    - paragraphs.paragraphs_type.view_block
+  module:
+    - field_group
+    - viewsreference
+third_party_settings:
+  field_group:
+    group_content:
+      children:
+        - field_vw_view
+      parent_name: group_tabs_content_group
+      weight: 4
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Content
+    group_tabs_content_group:
+      children:
+        - group_content
+        - group_options
+      parent_name: ''
+      weight: 1
+      format_type: tabs
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        direction: horizontal
+      label: 'Tabs - Content Group'
+    group_options:
+      children:
+        - status
+      parent_name: group_tabs_content_group
+      weight: 5
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Options
+id: paragraph.view_block.default
+targetEntityType: paragraph
+bundle: view_block
+mode: default
+content:
+  field_vw_view:
+    weight: 0
+    settings:
+      match_operator: CONTAINS
+      match_limit: '10'
+      size: '60'
+      placeholder: ''
+    third_party_settings: {  }
+    type: viewsreference_autocomplete
+    region: content
+  status:
+    type: boolean_checkbox
+    weight: 2
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+hidden:
+  created: true
