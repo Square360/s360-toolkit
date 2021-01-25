@@ -1,7 +1,7 @@
 s360_toolkit_layout_builder_onecol_section:
   label: 'One Column'
   path: layout/onecol
-  template: layout--onecol-section
+  template: s360-toolkit-layout-builder-onecol-section
   class: '\Drupal\s360_toolkit_layout_builder\Plugin\Layout\OneColumnLayout'
   category: 'Columns: 1'
   default_region: content
@@ -14,7 +14,7 @@ s360_toolkit_layout_builder_onecol_section:
 s360_toolkit_layout_builder_twocol_section:
   label: 'Two Column'
   path: layout/twocol
-  template: layout--twocol-section
+  template: s360-toolkit-layout-builder-twocol-section
   class: '\Drupal\s360_toolkit_layout_builder\Plugin\Layout\TwoColumnLayout'
   category: 'Columns: 2'
   default_region: first
@@ -29,7 +29,7 @@ s360_toolkit_layout_builder_twocol_section:
 s360_toolkit_layout_builder_threecol_section:
   label: 'Three Column'
   path: layout/threecol
-  template: layout--threecol-section
+  template: s360-toolkit-layout-builder-threecol-section
   class: '\Drupal\s360_toolkit_layout_builder\Plugin\Layout\ThreeColumnLayout'
   category: 'Columns: 3'
   default_region: first
@@ -46,7 +46,7 @@ s360_toolkit_layout_builder_threecol_section:
 s360_toolkit_layout_builder_fourcol_section:
   label: 'Four Column'
   path: layout/fourcol
-  template: layout--fourcol-section
+  template: s360-toolkit-layout-builder-fourcol-section
   category: 'Columns: 4'
   default_region: first
   icon_map:
