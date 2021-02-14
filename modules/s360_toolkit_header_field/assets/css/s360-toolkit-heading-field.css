@@ -1,0 +1,14 @@
+.s360-toolkit-header-field .fieldset-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.s360-toolkit-header-field .fieldset-wrapper > .form-item:last-of-type {
+  flex-grow: 2;
+  margin-left: 1em;
+}
+
+.s360-toolkit-header-field__options {
+  width: 100%;
+}

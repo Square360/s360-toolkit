@@ -1,0 +1,5 @@
+name: 'S360 Toolkit: Custom Header Field'
+description: 'Add a heading field with and optional subtitle wrapped in a header tag.'
+type: module
+package: 'S360 Toolkit'
+core: 8.x
