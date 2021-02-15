@@ -2,4 +2,4 @@ s360-toolkit-header-field:
   version: VERSION
   css:
     layout:
-      assets/css/s360-toolkit-header-field.css: {}
+      assets/css/header-field.css: {}
