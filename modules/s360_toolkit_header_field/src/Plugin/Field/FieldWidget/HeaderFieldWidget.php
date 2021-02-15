@@ -7,13 +7,13 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\link\Plugin\Field\FieldWidget\LinkWidget;
 
 /**
- * Plugin implementation of the 'header_field_widget' widget.
+ * Plugin implementation of the 'header_field' widget.
  *
  * @FieldWidget(
- *   id = "header_field_widget",
+ *   id = "header_field",
  *   label = @Translation("Header Field"),
  *   field_types = {
- *     "header_field_type"
+ *     "header_field"
  *   }
  * )
  */
@@ -24,28 +24,24 @@ class HeaderFieldWidget extends LinkWidget {
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     $item = $items[$delta];
+
     $element = parent::formElement($items, $delta, $element, $form, $form_state);
 
+    $element['#attached']['library'][] = 's360_toolkit_header_field/s360-toolkit-header-field';
     $element['title']['#title'] = 'Heading text';
-    $element['title']['#weight'] = -1;
-
-    if (!$this->getFieldSetting('heading_as_link')) {
-      unset($element['uri']);
-    }
-
-    $element['center'] = [
-      '#title' => 'Center',
-      '#type' => 'checkbox',
-      '#default_value' => isset($item->options['center']) ? $item->options['center'] : FALSE,
+    $element['#attributes'] = [
+      'class' => ['header-field'],
     ];
 
-    $element['uppercase'] = [
-      '#title' => 'Uppercase',
-      '#type' => 'checkbox',
-      '#default_value' => isset($item->options['uppercase']) ? $item->options['uppercase'] : FALSE,
+    // Start heading group.
+    $element['heading_group'] = [
+      '#type' => 'fieldset',
+      '#title' => t('Heading'),
+      '#attributes' => [
+        'class' => ['header-field__heading-group'],
+      ],
     ];
-
-    $element['tag'] = [
+    $element['heading_group']['tag'] = [
       '#title' => 'Semantic Tag',
       '#type' => 'select',
       '#options' => [
@@ -57,20 +53,74 @@ class HeaderFieldWidget extends LinkWidget {
       ],
       '#default_value' => $item->options['tag'] ?? 'h2',
     ];
+    $element['heading_group']['title'] = $element['title'];
 
-    $element['style_class'] = [
-      '#title' => 'Class',
-      '#type' => 'select',
-      '#options' => $this->getStyleClasses(),
-      '#empty_option' => t('- Select -'),
-      '#default_value' => $item->options['style_class'] ?? '',
-    ];
-
+    // Subtitle is not part of heading group.
     $element['subtitle'] = [
-      '#title' => 'Subtitle',
+      '#title' => 'Subtitle text',
       '#type' => 'textfield',
       '#default_value' => $item->subtitle ?? '',
     ];
+
+    // Start options group.
+    $element['options_group'] = [
+      '#type' => 'fieldset',
+      '#title' => t('Options'),
+      '#attributes' => [
+        'class' => ['header-field__options-group'],
+      ],
+    ];
+
+    // Start display group.
+    $element['options_group']['display_group'] = [
+      '#type' => 'details',
+      '#title' => t('Display options'),
+      '#open' => FALSE,
+    ];
+    $element['options_group']['display_group']['center'] = [
+      '#title' => 'Center',
+      '#type' => 'checkbox',
+      '#default_value' => $item->options['center'] ?? FALSE,
+      '#description' => t('When checked, the text will be centered.'),
+    ];
+    $element['options_group']['display_group']['uppercase'] = [
+      '#title' => 'Uppercase',
+      '#type' => 'checkbox',
+      '#default_value' => $item->options['uppercase'] ?? FALSE,
+      '#description' => t('When checked, the text will be uppercased.'),
+    ];
+    $element['options_group']['display_group']['style'] = [
+      '#title' => 'Style',
+      '#type' => 'select',
+      '#options' => $this->getAvailableStyles(),
+      '#empty_option' => t('- Select -'),
+      '#default_value' => $item->options['style'] ?? '',
+    ];
+
+    // Start link group.
+    $element['options_group']['link_group'] = [
+      '#type' => 'details',
+      '#title' => t('Link options'),
+      '#open' => FALSE,
+    ];
+
+    // It's weird to see "<nolink>" in the uri field, so remove it and let the
+    // processFields function handle the empty value.
+    if ($element['uri']['#default_value'] === '<nolink>') {
+      $element['uri']['#default_value'] = '';
+    }
+
+    $element['options_group']['link_group']['uri'] = $element['uri'];
+    $element['options_group']['link_group']['new_window'] = [
+      '#title' => t('Open link in new window.'),
+      '#type' => 'checkbox',
+      '#default_value' => $item->options['new_window'] ?? FALSE,
+      '#description' => t("Check this to force link to open in new window."),
+    ];
+
+    // Since we've moved the title and uri into groups, hide the original.
+    unset($element['title']);
+    unset($element['uri']);
 
     $element['#element_validate'][] = [get_called_class(), 'processFields'];
     $element['#element_validate'][] = [get_called_class(), 'processOptions'];
@@ -85,11 +135,18 @@ class HeaderFieldWidget extends LinkWidget {
     $values = $form_state->getValue($element['#parents']);
 
     // Change empty uri to '<nolink>'.
-    if ($element['uri']['#value'] === '' || !isset($element['uri'])) {
+    if ($element['options_group']['link_group']['uri']['#value'] === '') {
       $values['uri'] = '<nolink>';
+    }
+    else {
+      $values['uri'] = $element['options_group']['link_group']['uri']['#value'];
     }
 
     $values['subtitle'] = $element['subtitle']['#value'];
+
+    // Since the original title was moved into a group and unset, it needs to
+    // be accessed via 'header_group'.
+    $values['title'] = $element['heading_group']['title']['#value'];
 
     $form_state->setValueForElement($element, $values);
   }
@@ -101,31 +158,34 @@ class HeaderFieldWidget extends LinkWidget {
     $values = $form_state->getValue($element['#parents']);
 
     $values['options'] = [
-      'tag' => $values['tag'],
-      'center' => $values['center'],
-      'uppercase' => $values['uppercase'],
-      'style_class' => $values['style_class'],
+      'tag' => $element['heading_group']['tag']['#value'],
+      'center' => $element['options_group']['display_group']['center']['#value'],
+      'uppercase' => $element['options_group']['display_group']['uppercase']['#value'],
+      'style' => $element['options_group']['display_group']['style']['#value'],
+      'new_window' => $element['options_group']['link_group']['new_window']['#value'],
     ];
 
     $form_state->setValueForElement($element, $values);
   }
 
   /**
-   * Creates an array of available style classes.
-   *
-   * Combines the "allowed_classes" and basic h2-h6 classes.
+   * Creates an array of available styles.
    *
    * @return array
-   *   An associative array of available classes.
+   *   An associative array of available styles.
    */
-  private function getStyleClasses() {
-    $values = [
-      'h2' => 'Heading 2',
-      'h3' => 'Heading 3',
-      'h4' => 'Heading 4',
-      'h5' => 'Heading 5',
-      'h6' => 'Heading 6',
+  private function getAvailableStyles() {
+    $styles = [];
+
+    $headings = [
+      'header-group--heading-2' => 'Heading 2',
+      'header-group--heading-3' => 'Heading 3',
+      'header-group--heading-4' => 'Heading 4',
+      'header-group--heading-5' => 'Heading 5',
+      'header-group--heading-6' => 'Heading 6',
     ];
+
+    $styles = $headings;
 
     $list = explode("\n", $this->getFieldSetting('allowed_classes'));
     $list = array_map('trim', $list);
@@ -139,10 +199,12 @@ class HeaderFieldWidget extends LinkWidget {
         $value = trim($matches[2]);
       }
 
-      $values[$key] = $value;
+      $styles['header-group--' . $key] = $value;
     }
 
-    return $values;
+    $styles['visually-hidden'] = 'Visually Hidden';
+
+    return $styles;
   }
 
 }

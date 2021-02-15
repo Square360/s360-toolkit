@@ -9,14 +9,15 @@ use Drupal\link\LinkItemInterface;
 use Drupal\link\Plugin\Field\FieldType\LinkItem;
 
 /**
- * Plugin implementation of the 'header_field_type' field type.
+ * Plugin implementation of the 'header_field' field type.
  *
  * @FieldType(
- *   id = "header_field_type",
+ *   id = "header_field",
  *   label = @Translation("Header Field"),
  *   description = @Translation("Header Field"),
- *   default_widget = "header_field_widget",
- *   default_formatter = "header_field_formatter",
+ *   category = @Translation("Custom"),
+ *   default_widget = "header_field",
+ *   default_formatter = "header_field_header_group",
  * )
  */
 class HeaderFieldItem extends LinkItem {
@@ -37,7 +38,6 @@ class HeaderFieldItem extends LinkItem {
     return [
       'title' => DRUPAL_REQUIRED,
       'link_type' => LinkItemInterface::LINK_GENERIC,
-      'heading_as_link' => FALSE,
     ] + parent::defaultFieldSettings();
   }
 
@@ -86,21 +86,6 @@ class HeaderFieldItem extends LinkItem {
       '#default_value' => $this->getSetting('allowed_classes'),
       '#title' => t('Allowed classes'),
       '#description' => t('Possible styles that can be applied to the header field. Enter one value per line, in the format class-name|label.'),
-    ];
-
-    return $element;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function fieldSettingsForm(array $form, FormStateInterface $form_state) {
-    $element = parent::fieldSettingsForm($form, $form_state);
-
-    $element['heading_as_link'] = [
-      '#type' => 'checkbox',
-      '#title' => t('Render heading text as link'),
-      '#default_value' => $this->getSetting('heading_as_link'),
     ];
 
     return $element;
