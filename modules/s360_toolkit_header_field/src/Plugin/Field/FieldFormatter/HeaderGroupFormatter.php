@@ -50,7 +50,7 @@ class HeaderGroupFormatter extends LinkFormatter {
           'header-group',
           ($options['center'] ? 'header-group--centered' : ''),
           ($options['uppercase'] ? 'header-group--uppercase' : ''),
-          ($options['style_class'] ? $options['style_class'] : ''),
+          ($options['style'] ? $options['style'] : ''),
         ],
       ],
     ];
