@@ -2,21 +2,23 @@
 
 namespace Drupal\s360_toolkit_header_field\Plugin\Field\FieldFormatter;
 
-use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FieldItemInterface;
 use Drupal\Component\Utility\Html;
 use Drupal\link\Plugin\Field\FieldFormatter\LinkFormatter;
 
 /**
- * Plugin implementation of the 'header_field_formatter' formatter.
+ * Plugin implementation of the 'header_field' formatter.
  *
  * @FieldFormatter(
- *   id = "header_field_formatter",
- *   label = @Translation("Header Field"),
+ *   id = "header_field_header_group",
+ *   label = @Translation("Header Group"),
+ *   field_types = {
+ *     "header_field"
+ *   }
  * )
  */
-class HeaderFieldFormatter extends LinkFormatter {
+class HeaderGroupFormatter extends LinkFormatter {
 
   /**
    * {@inheritdoc}
@@ -37,8 +39,7 @@ class HeaderFieldFormatter extends LinkFormatter {
   private function viewValue(FieldItemInterface $item) {
     $heading_text = Html::escape($item->title);
     $subtitle_text = Html::escape($item->subtitle);
-    $url = $this->buildUrl($item);
-    $options = $url->getOptions();
+    $options = $item->options;
 
     // Create the <header /> tag.
     $header = [
@@ -49,7 +50,7 @@ class HeaderFieldFormatter extends LinkFormatter {
           'header-group',
           ($options['center'] ? 'header-group--centered' : ''),
           ($options['uppercase'] ? 'header-group--uppercase' : ''),
-          ($options['style_class'] ? 'header-group--' . $options['style_class'] : ''),
+          ($options['style_class'] ? $options['style_class'] : ''),
         ],
       ],
     ];
@@ -66,11 +67,19 @@ class HeaderFieldFormatter extends LinkFormatter {
     ];
 
     // When there's a uri, create a link and put it inside the heading.
-    if (!empty($item->get('uri'))) {
+    if ($item->get('uri')->getValue() !== 'route:<nolink>') {
+      $url = $this->buildUrl($item);
+
       $link = [
         '#type' => 'link',
         '#title' => $heading_text,
         '#url' => $url,
+        '#attributes' => [
+          'class' => [
+            'header-group__link',
+          ],
+          'target' => $options['new_window'] ? '_blank' : '_self',
+        ],
       ];
 
       $heading[] = $link;
