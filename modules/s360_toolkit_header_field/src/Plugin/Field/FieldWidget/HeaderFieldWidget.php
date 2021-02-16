@@ -5,6 +5,7 @@ namespace Drupal\s360_toolkit_header_field\Plugin\Field\FieldWidget;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\link\Plugin\Field\FieldWidget\LinkWidget;
+use Drupal\s360_toolkit_header_field\Plugin\Field\FieldType\HeaderFieldItem;
 
 /**
  * Plugin implementation of the 'header_field' widget.
@@ -35,7 +36,12 @@ class HeaderFieldWidget extends LinkWidget {
 
     // Modify the title field.
     $element['title']['#title'] = 'Heading text';
-    $element['title']['#required'] = TRUE;
+
+    // It's weird to see "<nolink>" in the uri field, so remove it and let the
+    // processFields function handle the empty value.
+    if ($element['uri']['#default_value'] === '<nolink>' || $element['uri']['#default_value'] === NULL) {
+      $element['uri']['#default_value'] = '';
+    }
 
     // Start heading group.
     $element['heading_group'] = [
@@ -45,23 +51,20 @@ class HeaderFieldWidget extends LinkWidget {
         'class' => ['header-field__heading-group'],
       ],
     ];
+
+    $semantic_tag_options = array_intersect_key(HeaderFieldItem::TAGS, array_flip($this->getFieldSetting('allowed_tags')));
+
     $element['heading_group']['tag'] = [
-      '#title' => 'Semantic Tag',
+      '#title' => t('Semantic Tag'),
       '#type' => 'select',
-      '#options' => [
-        'h2' => 'H2',
-        'h3' => 'H3',
-        'h4' => 'H4',
-        'h5' => 'H5',
-        'h6' => 'H6',
-      ],
+      '#options' => $semantic_tag_options,
       '#default_value' => $item->options['tag'] ?? 'h2',
     ];
     $element['heading_group']['title'] = $element['title'];
 
     // Subtitle is not part of heading group.
     $element['subtitle'] = [
-      '#title' => 'Subtitle text',
+      '#title' => t('Subtitle text'),
       '#type' => 'textfield',
       '#default_value' => $item->subtitle ?? '',
     ];
@@ -79,10 +82,10 @@ class HeaderFieldWidget extends LinkWidget {
     $element['options_group']['display_group'] = [
       '#type' => 'details',
       '#title' => t('Display options'),
-      '#open' => FALSE,
+      '#open' => ($item->options['center'] || $item->options['uppercase'] || $item->options['class']) ?? FALSE,
     ];
     $element['options_group']['display_group']['center'] = [
-      '#title' => 'Center',
+      '#title' => t('Center'),
       '#type' => 'checkbox',
       '#default_value' => $item->options['center'] ?? FALSE,
       '#description' => t('When checked, the text will be centered.'),
@@ -94,7 +97,7 @@ class HeaderFieldWidget extends LinkWidget {
       '#description' => t('When checked, the text will be uppercased.'),
     ];
     $element['options_group']['display_group']['class'] = [
-      '#title' => 'Style',
+      '#title' => t('Style'),
       '#type' => 'select',
       '#options' => $this->getStyleClasses(),
       '#empty_option' => t('- Select -'),
@@ -105,14 +108,8 @@ class HeaderFieldWidget extends LinkWidget {
     $element['options_group']['link_group'] = [
       '#type' => 'details',
       '#title' => t('Link options'),
-      '#open' => FALSE,
+      '#open' => ($item->options['new_window'] || $element['uri']['#default_value'] !== '') ?? FALSE,
     ];
-
-    // It's weird to see "<nolink>" in the uri field, so remove it and let the
-    // processFields function handle the empty value.
-    if ($element['uri']['#default_value'] === '<nolink>') {
-      $element['uri']['#default_value'] = '';
-    }
 
     $element['options_group']['link_group']['uri'] = $element['uri'];
     $element['options_group']['link_group']['new_window'] = [
@@ -165,7 +162,7 @@ class HeaderFieldWidget extends LinkWidget {
       'tag' => $element['heading_group']['tag']['#value'],
       'center' => $element['options_group']['display_group']['center']['#value'],
       'uppercase' => $element['options_group']['display_group']['uppercase']['#value'],
-      'style' => $element['options_group']['display_group']['style']['#value'],
+      'class' => $element['options_group']['display_group']['class']['#value'],
       'new_window' => $element['options_group']['link_group']['new_window']['#value'],
     ];
 

@@ -17,10 +17,17 @@ use Drupal\link\Plugin\Field\FieldType\LinkItem;
  *   description = @Translation("Header Field"),
  *   category = @Translation("Custom"),
  *   default_widget = "header_field",
- *   default_formatter = "header_field_header_group",
+ *   default_formatter = "header_field_semantic",
  * )
  */
 class HeaderFieldItem extends LinkItem {
+  const TAGS = [
+    'h2' => 'H2',
+    'h3' => 'H3',
+    'h4' => 'H4',
+    'h5' => 'H5',
+    'h6' => 'H6',
+  ];
 
   /**
    * {@inheritdoc}
@@ -38,6 +45,7 @@ class HeaderFieldItem extends LinkItem {
     return [
       'title' => DRUPAL_REQUIRED,
       'link_type' => LinkItemInterface::LINK_GENERIC,
+      'allowed_tags' => ['h2'],
     ] + parent::defaultFieldSettings();
   }
 
@@ -57,12 +65,7 @@ class HeaderFieldItem extends LinkItem {
   }
 
   /**
-   * Field type properties definition.
-   *
-   * Inside this method we define all the fields (properties) that our
-   * custom field type will have.
-   *
-   * Here is a list of allowed property types: https://goo.gl/sIBBgO
+   * {@inheritdoc}
    */
   public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition) {
     $properties = parent::propertyDefinitions($field_definition);
@@ -89,6 +92,37 @@ class HeaderFieldItem extends LinkItem {
     ];
 
     return $element;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function fieldSettingsForm(array $form, FormStateInterface $form_state) {
+    $element = parent::fieldSettingsForm($form, $form_state);
+
+    $element['allowed_tags'] = [
+      '#type' => 'checkboxes',
+      '#options' => HeaderFieldItem::TAGS,
+      '#title' => t('Allowed Tags'),
+      '#required' => TRUE,
+      '#default_value' => $this->getSetting('allowed_tags') ?? ['h2'],
+      '#element_validate' => [
+        [get_called_class(), 'fieldSettingsFormAllowedTagsValidate'],
+      ],
+    ];
+
+    return $element;
+  }
+
+  /**
+   * Formats the allowed tags setting.
+   */
+  public static function fieldSettingsFormAllowedTagsValidate(array &$element, FormStateInterface $form_state) {
+    $values = $form_state->getValue($element['#parents']);
+
+    $values = array_keys($element['#value']);
+
+    $form_state->setValueForElement($element, $values);
   }
 
 }

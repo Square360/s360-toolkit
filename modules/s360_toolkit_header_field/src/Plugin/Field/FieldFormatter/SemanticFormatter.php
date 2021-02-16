@@ -11,14 +11,14 @@ use Drupal\link\Plugin\Field\FieldFormatter\LinkFormatter;
  * Plugin implementation of the 'header_field' formatter.
  *
  * @FieldFormatter(
- *   id = "header_field_header_group",
- *   label = @Translation("Header Group"),
+ *   id = "header_field_semantic",
+ *   label = @Translation("Semantic Markup <header />"),
  *   field_types = {
  *     "header_field"
  *   }
  * )
  */
-class HeaderGroupFormatter extends LinkFormatter {
+class SemanticFormatter extends LinkFormatter {
 
   /**
    * {@inheritdoc}
@@ -50,7 +50,7 @@ class HeaderGroupFormatter extends LinkFormatter {
           'header-group',
           ($options['center'] ? 'header-group--centered' : ''),
           ($options['uppercase'] ? 'header-group--uppercase' : ''),
-          ($options['style'] ? $options['style'] : ''),
+          ($options['class'] ? $options['class'] : ''),
         ],
       ],
     ];

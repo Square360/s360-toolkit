@@ -10,14 +10,14 @@ use Drupal\Core\Field\FormatterBase;
  * Plugin implementation of the 'header_field' formatter.
  *
  * @FieldFormatter(
- *   id = "header_field_heading_text",
- *   label = @Translation("Heading Text (Plain text)"),
+ *   id = "header_field_string",
+ *   label = @Translation("Heading Text (plain)"),
  *   field_types = {
  *     "header_field"
  *   }
  * )
  */
-class HeadingTextFormatter extends FormatterBase {
+class StringFormatter extends FormatterBase {
 
   /**
    * {@inheritdoc}
@@ -39,7 +39,7 @@ class HeadingTextFormatter extends FormatterBase {
     return [
       '#type' => 'inline_template',
       '#template' => '{{ value|nl2br }}',
-      '#context' => ['value' => $item->title],
+      '#context' => ['value' => 'H2: ' . $item->title . ' (heading--3)'],
     ];
   }
 
