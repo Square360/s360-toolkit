@@ -27,11 +27,15 @@ class HeaderFieldWidget extends LinkWidget {
 
     $element = parent::formElement($items, $delta, $element, $form, $form_state);
 
+    // Attach the admin styles for the "header-field".
     $element['#attached']['library'][] = 's360_toolkit_header_field/s360-toolkit-header-field';
-    $element['title']['#title'] = 'Heading text';
     $element['#attributes'] = [
       'class' => ['header-field'],
     ];
+
+    // Modify the title field.
+    $element['title']['#title'] = 'Heading text';
+    $element['title']['#required'] = TRUE;
 
     // Start heading group.
     $element['heading_group'] = [
@@ -89,12 +93,12 @@ class HeaderFieldWidget extends LinkWidget {
       '#default_value' => $item->options['uppercase'] ?? FALSE,
       '#description' => t('When checked, the text will be uppercased.'),
     ];
-    $element['options_group']['display_group']['style'] = [
+    $element['options_group']['display_group']['class'] = [
       '#title' => 'Style',
       '#type' => 'select',
-      '#options' => $this->getAvailableStyles(),
+      '#options' => $this->getStyleClasses(),
       '#empty_option' => t('- Select -'),
-      '#default_value' => $item->options['style'] ?? '',
+      '#default_value' => $item->options['class'] ?? '',
     ];
 
     // Start link group.
@@ -169,14 +173,15 @@ class HeaderFieldWidget extends LinkWidget {
   }
 
   /**
-   * Creates an array of available styles.
+   * Creates an array of available style classes.
    *
    * @return array
-   *   An associative array of available styles.
+   *   An associative array of available style classes.
    */
-  private function getAvailableStyles() {
+  private function getStyleClasses() {
     $styles = [];
 
+    // Array of heading level classes.
     $headings = [
       'header-group--heading-2' => 'Heading 2',
       'header-group--heading-3' => 'Heading 3',
@@ -187,14 +192,14 @@ class HeaderFieldWidget extends LinkWidget {
 
     $styles = $headings;
 
-    $list = explode("\n", $this->getFieldSetting('allowed_classes'));
-    $list = array_map('trim', $list);
-    $list = array_filter($list, 'strlen');
+    $classes = explode("\n", $this->getFieldSetting('allowed_classes'));
+    $classes = array_map('trim', $classes);
+    $classes = array_filter($classes, 'strlen');
 
-    foreach ($list as $text) {
+    foreach ($classes as $class) {
       $matches = [];
 
-      if (preg_match('/(.*)\|(.*)/', $text, $matches)) {
+      if (preg_match('/(.*)\|(.*)/', $class, $matches)) {
         $key = trim($matches[1]);
         $value = trim($matches[2]);
       }
@@ -202,6 +207,7 @@ class HeaderFieldWidget extends LinkWidget {
       $styles['header-group--' . $key] = $value;
     }
 
+    // Add a visually hidden class.
     $styles['visually-hidden'] = 'Visually Hidden';
 
     return $styles;
