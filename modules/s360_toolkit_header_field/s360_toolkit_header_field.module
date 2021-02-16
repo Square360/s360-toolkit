@@ -2,5 +2,50 @@
 
 /**
  * @file
- * s360_toolkit.msodule
+ * s360_toolkit_header_field.module
  */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function s360_toolkit_header_field_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.s360_toolkit_header_field':
+      $output = '';
+
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('This module provides a custom header field also corresponding widget and formatters.') . '</p>';
+
+      $output .= '<h3>' . t('Formatters') . '</h3>';
+      $output .= '<h4>' . t('Header Group') . '</h4>';
+      $output .= '<p>' . t('This formatter is the default and creates the HTML markup for the header.') . '</p>';
+      $output .= '<h5>' . t('OUTPUT') . '</h5>';
+      $output .= '<code>';
+      $output .= '&lt;header class="header-group"&gt;<br>';
+      $output .= '&nbsp;&nbsp;&lt;h2 class="header-group__heading"&gt;Heading Text&lt;/h2&gt;<br>';
+      $output .= '&nbsp;&nbsp;&lt;div class="header-group__subtitle"&gt;Optional Subtitle&lt;/div&gt;<br>';
+      $output .= '&lt;/header&gt;';
+      $output .= '</code>';
+      $output .= '<h4>' . t('Heading Text (Plain text)') . '</h4>';
+      $output .= '<p>' . t('This formatter is typically used in "preview" display modes.') . '</p>';
+      $output .= '<h5>' . t('OUTPUT') . '</h5>';
+      $output .= '<code>Heading Text -- as plain text</code>';
+
+      $output .= '<h3>' . t('Classes') . '</h3>';
+      $output .= '<p>' . t('') . '</p>';
+      $output .= '<dl>';
+      $output .= '<dt>.header-group</dt>';
+      $output .= '<dd>A large feline inhabiting Bodmin Moor.</dd>';
+      $output .= '</dl>';
+
+      // <dt>Morgawr</dt>
+      // <dd>A sea serpent.</dd>
+
+      // <dt>Owlman</dt>
+      // <dd>A giant owl-like creature.</dd>
+
+      return $output;
+  }
+}
