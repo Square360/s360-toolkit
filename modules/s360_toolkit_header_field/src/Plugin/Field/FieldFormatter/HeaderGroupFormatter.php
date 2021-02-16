@@ -103,9 +103,9 @@ class HeaderGroupFormatter extends LinkFormatter {
             'header-group__subtitle',
           ],
         ],
+        '#value' => $subtitle_text,
       ];
 
-      $subtitle['#value'] = $subtitle_text;
       $header[] = $subtitle;
     }
 

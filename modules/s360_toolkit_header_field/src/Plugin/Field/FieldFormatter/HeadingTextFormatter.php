@@ -11,7 +11,7 @@ use Drupal\Core\Field\FormatterBase;
  *
  * @FieldFormatter(
  *   id = "header_field_heading_text",
- *   label = @Translation("Heading Text (Plain text"),
+ *   label = @Translation("Heading Text (Plain text)"),
  *   field_types = {
  *     "header_field"
  *   }
