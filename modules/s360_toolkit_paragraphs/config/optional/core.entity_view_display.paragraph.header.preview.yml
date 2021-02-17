@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.header.field_header
+    - paragraphs.paragraphs_type.header
+  module:
+    - s360_toolkit_header_field
+id: paragraph.header.preview
+targetEntityType: paragraph
+bundle: header
+mode: preview
+content:
+  field_header:
+    weight: 0
+    label: hidden
+    settings:
+      trim_length: ''
+      url_only: ''
+      url_plain: ''
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: header_field_string
+    region: content
+hidden: {  }

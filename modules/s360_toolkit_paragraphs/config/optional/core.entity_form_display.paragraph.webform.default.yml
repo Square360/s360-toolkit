@@ -2,10 +2,12 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.webform.field_wf_webform
+    - field.field.paragraph.webform.field_header
+    - field.field.paragraph.webform.field_webform
     - paragraphs.paragraphs_type.webform
   module:
     - field_group
+    - s360_toolkit_header_field
     - webform
 third_party_settings:
   field_group:
@@ -14,7 +16,7 @@ third_party_settings:
         - group_content
         - group_options
       parent_name: ''
-      weight: 0
+      weight: 1
       format_type: tabs
       region: content
       format_settings:
@@ -24,7 +26,7 @@ third_party_settings:
       label: 'Tabs - Content Group'
     group_content:
       children:
-        - field_wf_webform
+        - field_webform
       parent_name: group_tabs_content_group
       weight: 20
       format_type: tab
@@ -50,12 +52,22 @@ third_party_settings:
         formatter: closed
         required_fields: true
       label: Options
+_core:
+  default_config_hash: bi3qDRD9HF_yLoHuiLH1NUYxrCpaBxcF9F5TrAhFmyI
 id: paragraph.webform.default
 targetEntityType: paragraph
 bundle: webform
 mode: default
 content:
-  field_wf_webform:
+  field_header:
+    weight: 0
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: header_field
+    region: content
+  field_webform:
     weight: 1
     settings:
       default_data: true

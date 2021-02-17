@@ -2,18 +2,34 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.webform.field_wf_webform
+    - field.field.paragraph.webform.field_header
+    - field.field.paragraph.webform.field_webform
     - paragraphs.paragraphs_type.webform
   module:
+    - s360_toolkit_header_field
     - webform
+_core:
+  default_config_hash: CQSCbd5Wg-Xmdrcr0AOCagZo2IZlIVxRT8Wknf8uvko
 id: paragraph.webform.default
 targetEntityType: paragraph
 bundle: webform
 mode: default
 content:
-  field_wf_webform:
+  field_header:
     weight: 0
-    label: above
+    label: hidden
+    settings:
+      trim_length: ''
+      url_only: ''
+      url_plain: ''
+      rel: 0
+      target: 0
+    third_party_settings: {  }
+    type: header_field_semantic
+    region: content
+  field_webform:
+    weight: 1
+    label: hidden
     settings:
       source_entity: true
     third_party_settings: {  }

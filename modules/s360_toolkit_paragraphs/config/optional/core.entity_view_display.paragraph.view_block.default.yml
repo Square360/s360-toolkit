@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.view_block.field_vw_view
+    - field.field.paragraph.view_block.field_view
     - paragraphs.paragraphs_type.view_block
   module:
     - viewsreference
@@ -11,7 +11,7 @@ targetEntityType: paragraph
 bundle: view_block
 mode: default
 content:
-  field_vw_view:
+  field_view:
     weight: 0
     label: above
     settings:

@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.view_block.field_vw_view
+    - field.field.paragraph.view_block.field_view
     - paragraphs.paragraphs_type.view_block
   module:
     - field_group
@@ -11,7 +11,7 @@ third_party_settings:
   field_group:
     group_content:
       children:
-        - field_vw_view
+        - field_view
       parent_name: group_tabs_content_group
       weight: 4
       format_type: tab
@@ -55,7 +55,7 @@ targetEntityType: paragraph
 bundle: view_block
 mode: default
 content:
-  field_vw_view:
+  field_view:
     weight: 0
     settings:
       match_operator: CONTAINS

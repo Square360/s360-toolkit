@@ -3,15 +3,14 @@ status: true
 dependencies:
   module:
     - paragraphs
-    - views
-    - viewsreference
-id: paragraph.field_vw_view
-field_name: field_vw_view
+    - webform
+id: paragraph.field_webform
+field_name: field_webform
 entity_type: paragraph
-type: viewsreference
+type: webform
 settings:
-  target_type: view
-module: viewsreference
+  target_type: webform
+module: webform
 locked: false
 cardinality: 1
 translatable: true
