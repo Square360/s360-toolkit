@@ -20,6 +20,20 @@ use Drupal\s360_toolkit_header_field\Plugin\Field\FieldType\HeaderFieldItem;
  */
 class HeaderFieldWidget extends LinkWidget {
 
+  // Define all the heading classes.
+  const HEADING_CLASSES = [
+    'heading-2' => 'Heading 2',
+    'heading-3' => 'Heading 3',
+    'heading-4' => 'Heading 4',
+    'heading-5' => 'Heading 5',
+    'heading-6' => 'Heading 6',
+  ];
+
+  // Define any additional classes that can be used.
+  const ADDITIONAL_CLASSES = [
+    'visually-hidden' => 'Visually Hidden',
+  ];
+
   /**
    * {@inheritdoc}
    */
@@ -34,7 +48,7 @@ class HeaderFieldWidget extends LinkWidget {
       'class' => ['header-field'],
     ];
 
-    // Modify the title field.
+    // Rename the title field's title.
     $element['title']['#title'] = 'Heading text';
 
     // It's weird to see "<nolink>" in the uri field, so remove it and let the
@@ -52,13 +66,13 @@ class HeaderFieldWidget extends LinkWidget {
       ],
     ];
 
-    $semantic_tag_options = array_intersect_key(HeaderFieldItem::TAGS, array_flip($this->getFieldSetting('allowed_tags')));
+    $semantic_tag_options = array_intersect_key(HeaderFieldItem::AVAILABLE_TAGS, array_flip($this->getFieldSetting('allowed_tags')));
 
-    $element['heading_group']['tag'] = [
+    $element['heading_group']['heading_tag'] = [
       '#title' => t('Semantic Tag'),
       '#type' => 'select',
       '#options' => $semantic_tag_options,
-      '#default_value' => $item->options['tag'] ?? 'h2',
+      '#default_value' => $item->options['heading_tag'] ?? 'h2',
     ];
     $element['heading_group']['title'] = $element['title'];
 
@@ -99,7 +113,7 @@ class HeaderFieldWidget extends LinkWidget {
     $element['options_group']['display_group']['class'] = [
       '#title' => t('Style'),
       '#type' => 'select',
-      '#options' => $this->getStyleClasses(),
+      '#options' => $this->getClassOptions(),
       '#empty_option' => t('- Select -'),
       '#default_value' => $item->options['class'] ?? '',
     ];
@@ -139,15 +153,14 @@ class HeaderFieldWidget extends LinkWidget {
     if ($element['options_group']['link_group']['uri']['#value'] === '') {
       $values['uri'] = '<nolink>';
     }
+    // Set the uri with the uri's value from the link_group.
     else {
       $values['uri'] = $element['options_group']['link_group']['uri']['#value'];
     }
 
-    $values['subtitle'] = $element['subtitle']['#value'];
-
-    // Since the original title was moved into a group and unset, it needs to
-    // be accessed via 'header_group'.
+    // Set the title with the title's value from the heading_group.
     $values['title'] = $element['heading_group']['title']['#value'];
+    $values['subtitle'] = $element['subtitle']['#value'];
 
     $form_state->setValueForElement($element, $values);
   }
@@ -159,7 +172,7 @@ class HeaderFieldWidget extends LinkWidget {
     $values = $form_state->getValue($element['#parents']);
 
     $values['options'] = [
-      'tag' => $element['heading_group']['tag']['#value'],
+      'heading_tag' => $element['heading_group']['heading_tag']['#value'],
       'center' => $element['options_group']['display_group']['center']['#value'],
       'uppercase' => $element['options_group']['display_group']['uppercase']['#value'],
       'class' => $element['options_group']['display_group']['class']['#value'],
@@ -170,44 +183,36 @@ class HeaderFieldWidget extends LinkWidget {
   }
 
   /**
-   * Creates an array of available style classes.
+   * Creates an array of available classes.
    *
    * @return array
-   *   An associative array of available style classes.
+   *   An associative array of available classes.
    */
-  private function getStyleClasses() {
-    $styles = [];
+  private function getClassOptions() {
+    $classes = [];
 
-    // Array of heading level classes.
-    $headings = [
-      'header-group--heading-2' => 'Heading 2',
-      'header-group--heading-3' => 'Heading 3',
-      'header-group--heading-4' => 'Heading 4',
-      'header-group--heading-5' => 'Heading 5',
-      'header-group--heading-6' => 'Heading 6',
-    ];
+    // Add the heading classes.
+    $classes = HeaderFieldWidget::HEADING_CLASSES;
 
-    $styles = $headings;
+    $allowed_classes = explode("\n", $this->getFieldSetting('allowed_classes'));
+    $allowed_classes = array_map('trim', $allowed_classes);
+    $allowed_classes = array_filter($allowed_classes, 'strlen');
 
-    $classes = explode("\n", $this->getFieldSetting('allowed_classes'));
-    $classes = array_map('trim', $classes);
-    $classes = array_filter($classes, 'strlen');
-
-    foreach ($classes as $class) {
+    foreach ($allowed_classes as $allowed_class) {
       $matches = [];
 
-      if (preg_match('/(.*)\|(.*)/', $class, $matches)) {
+      if (preg_match('/(.*)\|(.*)/', $allowed_class, $matches)) {
         $key = trim($matches[1]);
         $value = trim($matches[2]);
       }
 
-      $styles['header-group--' . $key] = $value;
+      $classes[$key] = $value;
     }
 
-    // Add a visually hidden class.
-    $styles['visually-hidden'] = 'Visually Hidden';
+    // Merge in the additional classes.
+    $classes = array_merge($classes, HeaderFieldWidget::ADDITIONAL_CLASSES);
 
-    return $styles;
+    return $classes;
   }
 
 }

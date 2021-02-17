@@ -4,8 +4,6 @@ namespace Drupal\s360_toolkit_header_field\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FieldItemInterface;
-use Drupal\Component\Utility\Html;
-use Drupal\link\Plugin\Field\FieldFormatter\LinkFormatter;
 
 /**
  * Plugin implementation of the 'header_field' formatter.
@@ -18,7 +16,7 @@ use Drupal\link\Plugin\Field\FieldFormatter\LinkFormatter;
  *   }
  * )
  */
-class SemanticFormatter extends LinkFormatter {
+class SemanticFormatter extends Base {
 
   /**
    * {@inheritdoc}
@@ -37,8 +35,6 @@ class SemanticFormatter extends LinkFormatter {
    * {@inheritdoc}
    */
   private function viewValue(FieldItemInterface $item) {
-    $heading_text = Html::escape($item->title);
-    $subtitle_text = Html::escape($item->subtitle);
     $options = $item->options;
 
     // Create the <header /> tag.
@@ -50,63 +46,13 @@ class SemanticFormatter extends LinkFormatter {
           'header-group',
           ($options['center'] ? 'header-group--centered' : ''),
           ($options['uppercase'] ? 'header-group--uppercase' : ''),
-          ($options['class'] ? $options['class'] : ''),
+          ($options['class'] ? $this->formatClass($options['class']) : ''),
         ],
       ],
     ];
 
-    // Create the <h[2-6] /> tag using the $options['tag'] value.
-    $heading = [
-      '#type' => 'html_tag',
-      '#tag' => $options['tag'],
-      '#attributes' => [
-        'class' => [
-          'header-group__heading',
-        ],
-      ],
-    ];
-
-    // When there's a uri, create a link and put it inside the heading.
-    if ($item->get('uri')->getValue() !== 'route:<nolink>') {
-      $url = $this->buildUrl($item);
-
-      $link = [
-        '#type' => 'link',
-        '#title' => $heading_text,
-        '#url' => $url,
-        '#attributes' => [
-          'class' => [
-            'header-group__link',
-          ],
-          'target' => $options['new_window'] ? '_blank' : '_self',
-        ],
-      ];
-
-      $heading[] = $link;
-    }
-
-    // Otherwise just put heading_text inside the heading.
-    else {
-      $heading['#value'] = $heading_text;
-    }
-
-    // Put the heading inside the header.
-    $header[] = $heading;
-
-    // When there's subtitle text, create a div and put it inside the heading.
-    if (!empty($subtitle_text)) {
-      $subtitle = [
-        '#type' => 'html_tag',
-        '#tag' => 'div',
-        '#attributes' => [
-          'class' => [
-            'header-group__subtitle',
-          ],
-        ],
-        '#value' => $subtitle_text,
-      ];
-
-      $header[] = $subtitle;
+    foreach ($this->getHeaderTags($item) as $header_tag) {
+      $header[] = $header_tag;
     }
 
     return $header;

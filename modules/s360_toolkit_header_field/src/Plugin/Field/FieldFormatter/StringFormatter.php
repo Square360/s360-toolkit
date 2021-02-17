@@ -4,7 +4,7 @@ namespace Drupal\s360_toolkit_header_field\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FieldItemInterface;
-use Drupal\Core\Field\FormatterBase;
+use Drupal\s360_toolkit_header_field\Plugin\Field\FieldType\HeaderFieldItem;
 
 /**
  * Plugin implementation of the 'header_field' formatter.
@@ -17,7 +17,7 @@ use Drupal\Core\Field\FormatterBase;
  *   }
  * )
  */
-class StringFormatter extends FormatterBase {
+class StringFormatter extends Base {
 
   /**
    * {@inheritdoc}
@@ -36,10 +36,17 @@ class StringFormatter extends FormatterBase {
    * {@inheritdoc}
    */
   private function viewValue(FieldItemInterface $item) {
+    $options = $item->options;
+
+    $heading_tag = HeaderFieldItem::AVAILABLE_TAGS[$options['heading_tag']];
+    $class = $this->getClassLabel($options['class']);
+
     return [
       '#type' => 'inline_template',
       '#template' => '{{ value|nl2br }}',
-      '#context' => ['value' => 'H2: ' . $item->title . ' (heading--3)'],
+      '#context' => [
+        'value' => $heading_tag . ': ' . $item->title . ' (' . $class . ')',
+      ],
     ];
   }
 

@@ -21,7 +21,7 @@ use Drupal\link\Plugin\Field\FieldType\LinkItem;
  * )
  */
 class HeaderFieldItem extends LinkItem {
-  const TAGS = [
+  const AVAILABLE_TAGS = [
     'h2' => 'H2',
     'h3' => 'H3',
     'h4' => 'H4',
@@ -88,7 +88,7 @@ class HeaderFieldItem extends LinkItem {
       '#rows' => 10,
       '#default_value' => $this->getSetting('allowed_classes'),
       '#title' => t('Allowed classes'),
-      '#description' => t('Possible styles that can be applied to the header field. Enter one value per line, in the format class-name|label.'),
+      '#description' => t('<p>Possible styles that can be applied to the header field. Enter one value per line, in the format <strong>class-name|label</strong>.</p><p>All class-names will be prefixed with "<strong>header-group--</strong>".') . '</p>',
     ];
 
     return $element;
@@ -102,7 +102,7 @@ class HeaderFieldItem extends LinkItem {
 
     $element['allowed_tags'] = [
       '#type' => 'checkboxes',
-      '#options' => HeaderFieldItem::TAGS,
+      '#options' => HeaderFieldItem::AVAILABLE_TAGS,
       '#title' => t('Allowed Tags'),
       '#required' => TRUE,
       '#default_value' => $this->getSetting('allowed_tags') ?? ['h2'],
@@ -115,7 +115,7 @@ class HeaderFieldItem extends LinkItem {
   }
 
   /**
-   * Formats the allowed tags setting.
+   * Formats the allowed_tags setting.
    */
   public static function fieldSettingsFormAllowedTagsValidate(array &$element, FormStateInterface $form_state) {
     $values = $form_state->getValue($element['#parents']);
