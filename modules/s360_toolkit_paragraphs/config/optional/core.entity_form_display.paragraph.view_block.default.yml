@@ -2,10 +2,12 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.view_block.field_header
     - field.field.paragraph.view_block.field_view
     - paragraphs.paragraphs_type.view_block
   module:
     - field_group
+    - s360_toolkit_header_field
     - viewsreference
 third_party_settings:
   field_group:
@@ -50,11 +52,21 @@ third_party_settings:
         formatter: closed
         required_fields: true
       label: Options
+_core:
+  default_config_hash: DatJfKF0--W2FiQ4sJg3c4d7LhMz0xianzW9MrgvQZc
 id: paragraph.view_block.default
 targetEntityType: paragraph
 bundle: view_block
 mode: default
 content:
+  field_header:
+    weight: 0
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: header_field
+    region: content
   field_view:
     weight: 0
     settings:
