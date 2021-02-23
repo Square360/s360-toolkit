@@ -10,7 +10,7 @@ use Drupal\Core\Field\FieldItemInterface;
  *
  * @FieldFormatter(
  *   id = "header_field_semantic",
- *   label = @Translation("Semantic Markup <header />"),
+ *   label = @Translation("Semantic Markup (header)"),
  *   field_types = {
  *     "header_field"
  *   }

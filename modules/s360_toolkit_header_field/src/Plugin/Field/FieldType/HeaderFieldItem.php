@@ -45,7 +45,7 @@ class HeaderFieldItem extends LinkItem {
     return [
       'title' => DRUPAL_REQUIRED,
       'link_type' => LinkItemInterface::LINK_GENERIC,
-      'allowed_tags' => ['h2'],
+      'allowed_tags' => [],
     ] + parent::defaultFieldSettings();
   }
 
@@ -105,7 +105,7 @@ class HeaderFieldItem extends LinkItem {
       '#options' => HeaderFieldItem::AVAILABLE_TAGS,
       '#title' => t('Allowed Tags'),
       '#required' => TRUE,
-      '#default_value' => $this->getSetting('allowed_tags') ?? ['h2'],
+      '#default_value' => $this->getSetting('allowed_tags') ?? [],
       '#element_validate' => [
         [get_called_class(), 'fieldSettingsFormAllowedTagsValidate'],
       ],
