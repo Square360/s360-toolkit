@@ -10,7 +10,7 @@ use Drupal\Core\Field\FieldItemInterface;
  *
  * @FieldFormatter(
  *   id = "header_field_generic",
- *   label = @Translation("Generic Markup <div />"),
+ *   label = @Translation("Generic Markup (div)"),
  *   field_types = {
  *     "header_field"
  *   }
