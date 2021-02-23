@@ -1,8 +1,0 @@
-.layout--three-column {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.layout--three-column > * {
-  flex: 0 1 33%;
-}

@@ -1,8 +1,0 @@
-.layout--two-column {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.layout--two-column > * {
-  flex: 0 1 50%;
-}

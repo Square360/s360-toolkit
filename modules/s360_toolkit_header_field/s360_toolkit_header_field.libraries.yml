@@ -1,0 +1,5 @@
+s360-toolkit-header-field:
+  version: VERSION
+  css:
+    layout:
+      assets/css/header-field.css: {}

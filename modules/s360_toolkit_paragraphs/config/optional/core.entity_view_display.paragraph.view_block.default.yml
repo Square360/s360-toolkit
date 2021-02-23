@@ -2,18 +2,34 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.view_block.field_vw_view
+    - field.field.paragraph.view_block.field_header
+    - field.field.paragraph.view_block.field_view
     - paragraphs.paragraphs_type.view_block
   module:
+    - s360_toolkit_header_field
     - viewsreference
+_core:
+  default_config_hash: jntTAM0mAj8K674AJWG5tItdaik27YF4l_Id4aTkvFo
 id: paragraph.view_block.default
 targetEntityType: paragraph
 bundle: view_block
 mode: default
 content:
-  field_vw_view:
+  field_header:
     weight: 0
-    label: above
+    label: hidden
+    settings:
+      trim_length: ''
+      url_only: ''
+      url_plain: ''
+      rel: 0
+      target: 0
+    third_party_settings: {  }
+    type: header_field_semantic
+    region: content
+  field_view:
+    weight: 1
+    label: hidden
     settings:
       plugin_types:
         - block

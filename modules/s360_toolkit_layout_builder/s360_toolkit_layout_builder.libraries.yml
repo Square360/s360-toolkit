@@ -1,15 +1,5 @@
-twocol_section:
+s360_toolkit_layout_builder.admin:
   version: VERSION
   css:
     theme:
-      layout/twocol/twocol-section.css: {}
-threecol_section:
-  version: VERSION
-  css:
-    theme:
-      layout/threecol/threecol-section.css: {}
-fourcol_section:
-  version: VERSION
-  css:
-    theme:
-      layout/fourcol/fourcol-section.css: {}
+      css/s360-toolkit-layout-builder.admin.css: {}

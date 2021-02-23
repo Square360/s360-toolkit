@@ -1,0 +1,22 @@
+uuid: 3331af57-9301-4eee-9f48-db1fb9bbdde6
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+    - s360_toolkit_header_field
+_core:
+  default_config_hash: nr_mSR8RwdUaEy2aVKpv7yWcTM6nMx-j6tlSFzEqe7Y
+id: paragraph.field_header
+field_name: field_header
+entity_type: paragraph
+type: header_field
+settings:
+  allowed_classes: ''
+module: s360_toolkit_header_field
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

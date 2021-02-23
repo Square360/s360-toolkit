@@ -1,8 +1,9 @@
 name: 'S360 Toolkit: Layout Builder'
-description: ''
+description: 'Provides a layout paragraph and class configurations'
 type: module
 package: 'S360 Toolkit'
 dependencies:
   - drupal:paragraphs
   - drupal:layout_paragraphs
+  - s360_toolkit_header_field:s360_toolkit_header_field
 core: 8.x

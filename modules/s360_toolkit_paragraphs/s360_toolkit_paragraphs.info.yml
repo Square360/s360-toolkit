@@ -1,5 +1,5 @@
 name: 'S360 Toolkit: Paragraphs'
-description: ''
+description: 'Adds commonly used paragraphs types.'
 type: module
 package: 'S360 Toolkit'
 dependencies:

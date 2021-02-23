@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.view_block.field_header
+    - field.field.paragraph.view_block.field_view
+    - paragraphs.paragraphs_type.view_block
+  module:
+    - s360_toolkit_header_field
+_core:
+  default_config_hash: jntTAM0mAj8K674AJWG5tItdaik27YF4l_Id4aTkvFo
+id: paragraph.view_block.preview
+targetEntityType: paragraph
+bundle: view_block
+mode: preview
+content:
+  field_header:
+    weight: 0
+    label: hidden
+    settings:
+      trim_length: ''
+      url_only: ''
+      url_plain: ''
+      rel: 0
+      target: 0
+    third_party_settings: {  }
+    type: header_field_string
+    region: content
+hidden:
+  field_view: true
