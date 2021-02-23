@@ -10,4 +10,5 @@ dependencies:
   - drupal:views
   - drupal:viewsreference
   - drupal:webform
+  - square360:s360_toolkit
 core: 8.x
