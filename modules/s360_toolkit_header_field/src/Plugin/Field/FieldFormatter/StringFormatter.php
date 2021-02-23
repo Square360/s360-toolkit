@@ -45,7 +45,7 @@ class StringFormatter extends Base {
       '#type' => 'inline_template',
       '#template' => '{{ value|nl2br }}',
       '#context' => [
-        'value' => $heading_tag . ': ' . $item->title . ' (' . $class . ')',
+        'value' => $heading_tag . ': ' . $item->title . ($class !== '' ? ' (' . $class . ')' : ''),
       ],
     ];
   }

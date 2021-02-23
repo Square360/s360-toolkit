@@ -20,6 +20,8 @@ abstract class Base extends LinkFormatter {
     $allowed_classes = array_map('trim', $allowed_classes);
     $allowed_classes = array_filter($allowed_classes, 'strlen');
 
+    $classes = [];
+
     foreach ($allowed_classes as $allowed_class) {
       $matches = [];
 
