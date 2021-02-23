@@ -48,15 +48,17 @@ function s360_toolkit_layout_builder_preprocess_paragraph__layout_section(&$vari
     /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
     $paragraph = $elements['#paragraph'];
 
-    if ($paragraph->hasField('field_header')) {
-      $field_header = $paragraph->get('field_header');
+    if (!\Drupal::service('router.admin_context')->isAdminRoute()) {
+      if ($paragraph->hasField('field_header')) {
+        $field_header = $paragraph->get('field_header');
 
-      if (!$field_header->isEmpty()) {
-        $header = $field_header->view([
-          'label' => 'hidden',
-        ]);
+        if (!$field_header->isEmpty()) {
+          $header = $field_header->view([
+            'label' => 'hidden',
+          ]);
 
-        $variables['content']['regions']['custom']['header'] = $header;
+          $variables['content']['regions']['custom']['header'] = $header;
+        }
       }
     }
   }

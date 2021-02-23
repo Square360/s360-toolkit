@@ -5,5 +5,5 @@ package: 'S360 Toolkit'
 dependencies:
   - drupal:paragraphs
   - drupal:layout_paragraphs
-  - s360_toolkit_header_field:s360_toolkit_header_field
+  - square360:s360_toolkit_header_field
 core: 8.x
