@@ -1,5 +1,5 @@
 name: 'S360 Toolkit: Layout Builder'
-description: ''
+description: 'Provides a layout paragraph and class configurations'
 type: module
 package: 'S360 Toolkit'
 dependencies:
