@@ -2,10 +2,14 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.layout_section.field_header
     - paragraphs.paragraphs_type.layout_section
+_core:
+  default_config_hash: go_CmwQb2JtHdqPc-EIEMMXDS1gsXjtDR-mpIB3hFUI
 id: paragraph.layout_section.default
 targetEntityType: paragraph
 bundle: layout_section
 mode: default
 content: {  }
-hidden: {  }
+hidden:
+  field_header: true

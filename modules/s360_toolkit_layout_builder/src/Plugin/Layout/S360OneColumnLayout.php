@@ -3,8 +3,6 @@
 namespace Drupal\s360_toolkit_layout_builder\Plugin\Layout;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Layout\LayoutDefault;
-use Drupal\Core\Plugin\PluginFormInterface;
 
 /**
  * Configurable one column layout plugin class.
@@ -12,7 +10,19 @@ use Drupal\Core\Plugin\PluginFormInterface;
  * @internal
  *   Plugin classes are internal.
  */
-class OneColumnLayout extends LayoutDefault implements PluginFormInterface {
+class S360OneColumnLayout extends S360BaseLayout {
+
+  /**
+   * {@inheritdoc}
+   */
+  public function defaultConfiguration() {
+    $configuration = parent::defaultConfiguration();
+
+    return $configuration + [
+      'edge_to_edge' => FALSE,
+      'inset' => FALSE,
+    ];
+  }
 
   /**
    * {@inheritdoc}

@@ -1,0 +1,47 @@
+uuid: c3c101d5-a0c1-4438-9e47-37b4d930f9d1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_header
+    - paragraphs.paragraphs_type.layout_section
+  module:
+    - s360_toolkit_header_field
+id: paragraph.layout_section.field_header
+field_name: field_header
+entity_type: paragraph
+bundle: layout_section
+label: Header
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    attributes: {  }
+    heading_group:
+      heading_tag: h2
+      title: ''
+    subtitle: ''
+    options_group:
+      display_group:
+        center: 0
+        uppercase: 0
+        class: ''
+      link_group:
+        uri: ''
+        new_window: 0
+    uri: 'route:<nolink>'
+    title: ''
+    options:
+      heading_tag: h2
+      center: 0
+      uppercase: 0
+      class: ''
+      new_window: 0
+default_value_callback: ''
+settings:
+  link_type: '17'
+  title: '2'
+  allowed_tags:
+    - h2
+field_type: header_field

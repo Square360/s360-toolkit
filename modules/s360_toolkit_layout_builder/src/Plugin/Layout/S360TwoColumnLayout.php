@@ -3,8 +3,6 @@
 namespace Drupal\s360_toolkit_layout_builder\Plugin\Layout;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Layout\LayoutDefault;
-use Drupal\Core\Plugin\PluginFormInterface;
 
 /**
  * Configurable one column layout plugin class.
@@ -12,7 +10,7 @@ use Drupal\Core\Plugin\PluginFormInterface;
  * @internal
  *   Plugin classes are internal.
  */
-class TwoColumnLayout extends LayoutDefault implements PluginFormInterface {
+class S360TwoColumnLayout extends S360BaseLayout {
 
   /**
    * {@inheritdoc}
@@ -21,7 +19,7 @@ class TwoColumnLayout extends LayoutDefault implements PluginFormInterface {
     $configuration = parent::defaultConfiguration();
 
     return $configuration + [
-      'column_width' => $this->getDefaultWidth(),
+      'column_width' => '50-50',
     ];
   }
 
@@ -80,13 +78,6 @@ class TwoColumnLayout extends LayoutDefault implements PluginFormInterface {
       '75-25' => '75%/25%',
       '25-75' => '25%/75%',
     ];
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  protected function getDefaultWidth() {
-    return '50-50';
   }
 
 }

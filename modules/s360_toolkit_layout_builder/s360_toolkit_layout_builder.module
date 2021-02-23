@@ -9,23 +9,55 @@
  * Implements hook_layout_alter().
  */
 function s360_toolkit_layout_builder_layout_alter(&$definitions) {
-  // Remove default layout from layout_builder module.
-  unset($definitions['layout_twocol_section']);
-  unset($definitions['layout_threecol_section']);
-  unset($definitions['layout_fourcol_section']);
+  $layouts_to_hide = [
+    // Remove default layout from layout_builder module.
+    'layout_twocol_section',
+    'layout_threecol_section',
+    'layout_fourcol_section',
+    // Remove default layout from layout_discovery module.
+    'layout_onecol',
+    'layout_twocol',
+    'layout_twocol_bricks',
+    'layout_threecol_25_50_25',
+    'layout_threecol_33_34_33',
+  ];
 
-  // Remove default layout from layout_discovery module.
-  unset($definitions['layout_onecol']);
-  unset($definitions['layout_twocol']);
-  unset($definitions['layout_twocol_bricks']);
-  unset($definitions['layout_threecol_25_50_25']);
-  unset($definitions['layout_threecol_33_34_33']);
+  foreach ($definitions as $definition) {
+    if (in_array($definition->id(), $layouts_to_hide)) {
+      unset($definitions[$definition->id()]);
+    }
+  }
 }
 
+/**
+ * Implements hook_page_attachments_alter().
+ */
 function s360_toolkit_layout_builder_page_attachments_alter(array &$attachments) {
   if (\Drupal::service('router.admin_context')->isAdminRoute()) {
-    $attachments['#attached']['library'][] = 's360_toolkit_layout_builder/twocol_section';
-    $attachments['#attached']['library'][] = 's360_toolkit_layout_builder/threecol_section';
-    $attachments['#attached']['library'][] = 's360_toolkit_layout_builder/fourcol_section';
+    $attachments['#attached']['library'][] = 's360_toolkit_layout_builder/s360_toolkit_layout_builder.admin';
+  }
+}
+
+/**
+ * Implements hook_preprocess_paragraph__layout_section().
+ */
+function s360_toolkit_layout_builder_preprocess_paragraph__layout_section(&$variables) {
+  $elements = $variables['elements'];
+
+  if (isset($elements['#paragraph'])) {
+    /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+    $paragraph = $elements['#paragraph'];
+
+    if ($paragraph->hasField('field_header')) {
+      $field_header = $paragraph->get('field_header');
+
+      if (!$field_header->isEmpty()) {
+        $header = $field_header->view([
+          'label' => 'hidden',
+        ]);
+
+        $variables['content']['regions']['custom']['header'] = $header;
+      }
+    }
   }
 }

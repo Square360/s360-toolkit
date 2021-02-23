@@ -1,0 +1,26 @@
+.layout--two-column {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.layout--two-column > * {
+  flex: 0 1 50%;
+}
+
+.layout--three-column {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.layout--three-column > * {
+  flex: 0 1 33%;
+}
+
+.layout--four-column {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.layout--four-column > * {
+  flex: 0 1 25%;
+}
