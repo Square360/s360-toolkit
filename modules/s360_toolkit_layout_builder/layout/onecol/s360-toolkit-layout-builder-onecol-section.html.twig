@@ -7,8 +7,11 @@
 {% if content %}
   <section{{ attributes.addClass(classes) }}>
     {{ content.custom.header }}
-    <div {{ region_attributes.content }} class="layout__region layout__region--content">
-      {{ content.content }}
+    
+    <div class="layout__regions">
+      <div {{ region_attributes.content }} class="layout__region layout__region--content">
+        {{ content.content }}
+      </div>
     </div>
   </section>
 {% endif %}
