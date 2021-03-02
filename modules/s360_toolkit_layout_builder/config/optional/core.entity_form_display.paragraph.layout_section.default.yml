@@ -12,15 +12,6 @@ id: paragraph.layout_section.default
 targetEntityType: paragraph
 bundle: layout_section
 mode: default
-content:
-  field_header:
-    weight: 0
-    settings:
-      placeholder_url: ''
-      placeholder_title: ''
-    third_party_settings: {  }
-    type: header_field
-    region: content
+content: { }
 hidden:
-  created: true
-  status: true
+  field_header: true
