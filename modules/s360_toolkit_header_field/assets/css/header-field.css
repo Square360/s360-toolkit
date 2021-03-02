@@ -1,20 +1,11 @@
-/* .s360-toolkit-header-field .fieldset-wrapper {
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
+.header-field > .fieldset-wrapper {
+  border: 1px solid #666;
+  padding: 1rem;
+  margin: 0;
 }
 
-.s360-toolkit-header-field .fieldset-wrapper > .form-item:last-of-type {
-  flex-grow: 2;
-  margin-left: 1em;
-}
-
-.s360-toolkit-header-field__options {
-  width: 100%;
-} */
-
-.header-field .header-field__heading-group,
-.header-field .header-field__options-group {
+.header-field > .fieldset-wrapper .header-field__heading-group,
+.header-field > .fieldset-wrapper .header-field__options-group {
   padding: 0;
   margin: 0;
 }
@@ -33,7 +24,6 @@
 .header-field .header-field__heading-group .fieldset-wrapper select {
   min-width: unset;
 }
-
 
 .header-field .header-field__options-group .fieldset-wrapper {
   display: grid;
