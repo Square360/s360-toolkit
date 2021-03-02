@@ -37,25 +37,30 @@ class SemanticFormatter extends Base {
   private function viewValue(FieldItemInterface $item) {
     $options = $item->options;
 
-    // Create the <header /> tag.
-    $header = [
-      '#type' => 'html_tag',
-      '#tag' => 'header',
-      '#attributes' => [
-        'class' => [
-          'header-group',
-          ($options['center'] ? 'header-group--centered' : ''),
-          ($options['uppercase'] ? 'header-group--uppercase' : ''),
-          ($options['class'] ? $this->formatClass($options['class']) : ''),
+    if ($item->title) {
+      // Create the <header /> tag.
+      $header = [
+        '#type' => 'html_tag',
+        '#tag' => 'header',
+        '#attributes' => [
+          'class' => [
+            'header-group',
+            ($options['center'] ? 'header-group--centered' : ''),
+            ($options['uppercase'] ? 'header-group--uppercase' : ''),
+            ($options['class'] ? $this->formatClass($options['class']) : ''),
+          ],
         ],
-      ],
-    ];
+      ];
 
-    foreach ($this->getHeaderTags($item) as $header_tag) {
-      $header[] = $header_tag;
+      foreach ($this->getHeaderTags($item) as $header_tag) {
+        $header[] = $header_tag;
+      }
+
+      return $header;
     }
-
-    return $header;
+    else {
+      return FALSE;
+    }
   }
 
 }
