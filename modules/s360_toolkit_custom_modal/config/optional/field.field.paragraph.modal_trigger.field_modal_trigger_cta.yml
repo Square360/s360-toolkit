@@ -1,0 +1,38 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_modal_trigger_cta
+    - paragraphs.paragraphs_type.modal_trigger
+  module:
+    - double_field
+id: paragraph.modal_trigger.field_modal_trigger_cta
+field_name: field_modal_trigger_cta
+entity_type: paragraph
+bundle: modal_trigger
+label: CTA
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  first:
+    label: Label
+    required: true
+    list: false
+    allowed_values: {  }
+    max: null
+    min: null
+    on_label: 'On'
+    off_label: 'Off'
+  second:
+    label: 'Modal ID'
+    required: true
+    list: false
+    allowed_values: {  }
+    max: null
+    min: null
+    on_label: 'On'
+    off_label: 'Off'
+field_type: double_field

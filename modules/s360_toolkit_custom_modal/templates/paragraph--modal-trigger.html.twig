@@ -1,0 +1,10 @@
+{%
+  set classes = [
+    'stcm-modal-trigger',
+    not paragraph.isPublished() ? 'stcm-modal-trigger--unpublished',
+    is_front ? 'stcm-modal-trigger--is-front',
+  ]
+%}
+<div{{ attributes.addClass(classes) }}>
+  {{ content.field_modal_trigger_cta }}
+</div>

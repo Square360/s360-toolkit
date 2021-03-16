@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_modal_scroll_delay
+field_name: field_modal_scroll_delay
+entity_type: paragraph
+type: list_integer
+settings:
+  allowed_values:
+    -
+      value: 25
+      label: '25% Down'
+    -
+      value: 50
+      label: '50% Down'
+    -
+      value: 75
+      label: '75% Down'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

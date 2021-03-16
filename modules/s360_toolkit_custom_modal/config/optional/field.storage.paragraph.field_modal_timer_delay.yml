@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_modal_timer_delay
+field_name: field_modal_timer_delay
+entity_type: paragraph
+type: list_integer
+settings:
+  allowed_values:
+    -
+      value: 5
+      label: 'After 5 seconds'
+    -
+      value: 10
+      label: 'After 10 seconds'
+    -
+      value: 15
+      label: 'After 15 seconds'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

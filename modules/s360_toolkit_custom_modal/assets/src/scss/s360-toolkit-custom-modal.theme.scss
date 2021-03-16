@@ -1,0 +1,13 @@
+@import "~s360-fundamental-toolkit/scss/toolkit";
+@import "~s360-fundamental-toolkit/scss/reset";
+
+/*SLIDER*/
+
+// ALWAYS FIRST
+// **************************************************
+@import "./core";
+@import "./fonts";
+
+@import "./common";
+@import "./components";
+@import "./layout";

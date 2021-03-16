@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_modal_timer_delay
+    - paragraphs.paragraphs_type.modal
+  module:
+    - options
+id: paragraph.modal.field_modal_timer_delay
+field_name: field_modal_timer_delay
+entity_type: paragraph
+bundle: modal
+label: 'Timer Delay'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_integer

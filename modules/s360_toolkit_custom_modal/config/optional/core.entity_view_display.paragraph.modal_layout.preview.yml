@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - paragraphs.paragraphs_type.modal_layout
+id: paragraph.modal_layout.preview
+targetEntityType: paragraph
+bundle: modal_layout
+mode: preview
+content: {  }
+hidden: {  }

@@ -1,0 +1,11 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.modal_layout
+id: paragraph.modal_layout.default
+targetEntityType: paragraph
+bundle: modal_layout
+mode: default
+content: {  }
+hidden: {  }

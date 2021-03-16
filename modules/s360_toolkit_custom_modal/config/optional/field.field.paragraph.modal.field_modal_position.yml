@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_modal_position
+    - paragraphs.paragraphs_type.modal
+  module:
+    - options
+id: paragraph.modal.field_modal_position
+field_name: field_modal_position
+entity_type: paragraph
+bundle: modal
+label: Position
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

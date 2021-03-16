@@ -1,0 +1,9 @@
+name: 'S360 Toolkit: Custom Modal'
+description: 'Creates a customizable modal paragraph.'
+package: 'S360 Toolkit'
+type: module
+dependencies:
+  - drupal:paragraphs
+  - drupal:layout_paragraphs
+  - square360:s360_toolkit_header_field
+core: 8.x

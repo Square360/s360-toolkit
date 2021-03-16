@@ -1,0 +1,4 @@
+s360-toolkit-custom-modal.theme:
+  version: VERSION
+  js:
+    assets/dist/js/s360-toolkit-custom-modal.theme.min.js: {}

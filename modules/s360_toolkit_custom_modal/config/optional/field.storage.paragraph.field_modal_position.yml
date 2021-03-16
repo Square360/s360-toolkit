@@ -1,0 +1,50 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_modal_position
+field_name: field_modal_position
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: frame-top
+      label: 'Frame (Top)'
+    -
+      value: frame-bottom
+      label: 'Frame (Bottom)'
+    -
+      value: popup-small
+      label: 'Popup (Small)'
+    -
+      value: popup-medium
+      label: 'Popup (Medium)'
+    -
+      value: popup-large
+      label: 'Popup (Large)'
+    -
+      value: popup-xlarge
+      label: 'Popup (Extra Large)'
+    -
+      value: side-top-right
+      label: 'Side (Top Right)'
+    -
+      value: side-top-left
+      label: 'Side (Top Left)'
+    -
+      value: side-bottom-right
+      label: 'Side (Bottom Right)'
+    -
+      value: side-bottom-left
+      label: 'Side (Bottom Left)'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
