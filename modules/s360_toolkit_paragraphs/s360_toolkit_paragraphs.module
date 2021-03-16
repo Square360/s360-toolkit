@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Component\Utility\Html;
 
 /**
  * Implements hook_help().
@@ -29,5 +30,23 @@ function s360_toolkit_paragraphs_help($route_name, RouteMatchInterface $route_ma
       $output .= '</ul>';
 
       return $output;
+  }
+}
+
+/**
+ * Implements hook_help().
+ */
+function s360_toolkit_paragraphs_preprocess_paragraphs(&$variables) {
+  $elements = $variables['elements'];
+
+  if (isset($elements['#paragraph'])) {
+    /** @var \Drupal\paragraph\Entity\Paragraph $paragraph */
+    $paragraph = $elements['#paragraph'];
+    $paragraph_bundle = $paragraph->bundle();
+
+    
+    $variables['attributes']['id'] = 'paragraph-' . Html::getClass($paragraph_bundle). '-' . $paragraph->id();
+    $variables['attributes']['class'] = [];
+    $variables['attributes']['data-paragraph-' . Html::getClass($paragraph_bundle)] = '';
   }
 }
