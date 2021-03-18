@@ -5,12 +5,23 @@
  * s360_toolkit_custom_modal.module
  */
 
+/**
+ * Implements hook_page_attachments_alter().
+ */
 function s360_toolkit_custom_modal_page_attachments_alter(array &$attachments) {
+  // Attach the "theme" library only when the route is NOT the admin.
   if (!\Drupal::service('router.admin_context')->isAdminRoute()) {
     $attachments['#attached']['library'][] = 's360_toolkit_custom_modal/s360-toolkit-custom-modal.theme';
   }
+  // Otherwise attach the "admin" library.
+  else {
+    $attachments['#attached']['library'][] = 's360_toolkit_custom_modal/s360-toolkit-custom-modal.admin';
+  }
 }
 
+/**
+ * Implements hook_theme().
+ */
 function s360_toolkit_custom_modal_theme($existing, $type, $theme, $path) {
   return [
     'paragraph__modal' => [
@@ -61,6 +72,12 @@ function s360_toolkit_custom_modal_preprocess_paragraph__modal(&$variables) {
     if ($paragraph->hasField('field_modal_frequency')) {
       $field_modal_frequency = $paragraph->get('field_modal_frequency');
     }
+    if ($paragraph->hasField('field_modal_style')) {
+      $field_modal_style = $paragraph->get('field_modal_style');
+    }
+    if ($paragraph->hasField('field_modal_position')) {
+      $field_modal_position = $paragraph->get('field_modal_position');
+    }
 
     $modal_settings = [
       'trigger' => isset($field_modal_trigger)
@@ -83,20 +100,19 @@ function s360_toolkit_custom_modal_preprocess_paragraph__modal(&$variables) {
           ? intval($field_modal_frequency->getString())
           : 0)
         : 0,
+      'style' => isset($field_modal_position)
+        ? ($field_modal_position->count()
+          ? $field_modal_position->getString()
+          : '')
+        : '',
     ];
 
-    if ($paragraph->hasField('field_modal_style')) {
-      $field_modal_style = $paragraph->get('field_modal_style');
-      if ($field_modal_style->count()) {
-        $variables['attributes']['class'][] = 'stcm-modal--style-' . $field_modal_style->getString();
-      }
+    if ($field_modal_style->count()) {
+      $variables['attributes']['class'][] = 'stcm-modal--style-' . $field_modal_style->getString();
     }
 
-    if ($paragraph->hasField('field_modal_position')) {
-      $field_modal_style = $paragraph->get('field_modal_position');
-      if ($field_modal_style->count()) {
-        $variables['attributes']['class'][] = 'stcm-modal--position-' . $field_modal_style->getString();
-      }
+    if ($field_modal_position->count()) {
+      $variables['attributes']['class'][] = 'stcm-modal--position-' . $field_modal_position->getString();
     }
 
     $variables['attributes']['data-modal-settings'] = json_encode($modal_settings);
@@ -106,7 +122,7 @@ function s360_toolkit_custom_modal_preprocess_paragraph__modal(&$variables) {
 }
 
 /**
- * Implements hook_preprocess_paragraph__layout_section().
+ * Implements hook_preprocess_paragraph__modal_layout().
  */
 function s360_toolkit_custom_modal_preprocess_paragraph__modal_layout(&$variables) {
   if (isset($variables['paragraph'])) {
@@ -115,10 +131,10 @@ function s360_toolkit_custom_modal_preprocess_paragraph__modal_layout(&$variable
 
     if (!\Drupal::service('router.admin_context')->isAdminRoute()) {
       if ($paragraph->hasField('field_modal_layout_header')) {
-        $field_header = $paragraph->get('field_modal_layout_header');
+        $field_modal_layout_header = $paragraph->get('field_modal_layout_header');
 
-        if (!$field_header->isEmpty()) {
-          $header = $field_header->view([
+        if (!$field_modal_layout_header->isEmpty()) {
+          $header = $field_modal_layout_header->view([
             'label' => 'hidden',
           ]);
 

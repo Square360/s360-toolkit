@@ -2,10 +2,12 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.modal_layout.field_modal_layout_header
     - paragraphs.paragraphs_type.modal_layout
 id: paragraph.modal_layout.default
 targetEntityType: paragraph
 bundle: modal_layout
 mode: default
 content: {  }
-hidden: {  }
+hidden:
+  field_modal_layout_header: true

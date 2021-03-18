@@ -11,6 +11,4 @@ description: ''
 behavior_plugins:
   layout_paragraphs:
     enabled: true
-    available_layouts:
-      onecol_section: 'One Column'
-      twocol_section: 'Two Column'
+    available_layouts: null

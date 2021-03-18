@@ -28,11 +28,11 @@ content:
         decimal_separator: .
         scale: 2
       second:
-        prefix: 'Modal ID:'
+        hidden: true
+        prefix: ''
         suffix: ''
         link: false
         format_type: medium
-        hidden: false
         thousand_separator: ''
         decimal_separator: .
         scale: 2

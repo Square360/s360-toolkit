@@ -40,6 +40,9 @@ settings:
     -
       value: side-bottom-left
       label: 'Side (Bottom Left)'
+    -
+      value: fullscreen
+      label: 'Curtain (Fullscreen)'
   allowed_values_function: ''
 module: options
 locked: false
