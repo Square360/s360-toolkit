@@ -44,9 +44,9 @@ class GenericFormatter extends Base {
         '#tag' => 'div',
         '#attributes' => [
           'class' => [
-            'sthf-header-group',
-            ($options['center'] ? 'sthf-header-group--centered' : ''),
-            ($options['uppercase'] ? 'sthf-header-group--uppercase' : ''),
+            'sthf-header',
+            ($options['center'] ? 'sthf-header--centered' : ''),
+            ($options['uppercase'] ? 'sthf-header--uppercase' : ''),
             ($options['class'] ? $this->formatClass($options['class']) : ''),
           ],
         ],

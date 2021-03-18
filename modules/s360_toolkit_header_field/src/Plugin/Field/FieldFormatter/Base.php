@@ -48,7 +48,7 @@ abstract class Base extends LinkFormatter {
    */
   protected function formatClass(string $raw_classname) {
     return ($raw_classname !== 'visually-hidden')
-      ? 'sthf-header-group--' . $raw_classname
+      ? 'sthf-header--' . $raw_classname
       : $raw_classname;
   }
 
@@ -67,7 +67,7 @@ abstract class Base extends LinkFormatter {
       '#tag' => $options['heading_tag'],
       '#attributes' => [
         'class' => [
-          'sthf-header-group__heading',
+          'sthf-header__heading',
         ],
       ],
     ];
@@ -82,7 +82,7 @@ abstract class Base extends LinkFormatter {
         '#url' => $url,
         '#attributes' => [
           'class' => [
-            'sthf-header-group__link',
+            'sthf-header__link',
           ],
           'target' => $options['new_window'] ? '_blank' : '_self',
         ],
@@ -105,7 +105,7 @@ abstract class Base extends LinkFormatter {
         '#tag' => 'div',
         '#attributes' => [
           'class' => [
-            'sthf-header-group__subtitle',
+            'sthf-header__subtitle',
           ],
         ],
         '#value' => $subtitle_text,
