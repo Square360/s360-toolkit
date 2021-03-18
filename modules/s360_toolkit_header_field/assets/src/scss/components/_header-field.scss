@@ -1,0 +1,34 @@
+.header-field {
+  > .fieldset-wrapper {
+    border: 1px solid #666;
+    padding: 1rem;
+    margin: 0;
+  }
+
+  > .fieldset-wrapper .header-field__heading-group,
+  > .fieldset-wrapper .header-field__options-group {
+    padding: 0;
+    margin: 0;
+  }
+
+  .header-field__heading-group legend,
+  .header-field__options-group legend {
+    display: none;
+  }
+
+  .header-field__heading-group .fieldset-wrapper {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 20px;
+  }
+
+  .header-field__heading-group .fieldset-wrapper select {
+    min-width: unset;
+  }
+
+  .header-field__options-group .fieldset-wrapper {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr 1fr;
+  }
+}
