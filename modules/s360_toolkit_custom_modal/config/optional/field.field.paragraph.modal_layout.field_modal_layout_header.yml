@@ -1,0 +1,46 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_modal_layout_header
+    - paragraphs.paragraphs_type.modal_layout
+  module:
+    - s360_toolkit_header_field
+id: paragraph.modal_layout.field_modal_layout_header
+field_name: field_modal_layout_header
+entity_type: paragraph
+bundle: modal_layout
+label: Header
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    attributes: {  }
+    heading_group:
+      heading_tag: h2
+      title: ''
+    subtitle: ''
+    options_group:
+      display_group:
+        center: 0
+        uppercase: 0
+        class: ''
+      link_group:
+        uri: ''
+        new_window: 0
+    uri: 'route:<nolink>'
+    title: ''
+    options:
+      heading_tag: h2
+      center: 0
+      uppercase: 0
+      class: ''
+      new_window: 0
+default_value_callback: ''
+settings:
+  link_type: '17'
+  title: '2'
+  allowed_tags:
+    - h2
+field_type: header_field

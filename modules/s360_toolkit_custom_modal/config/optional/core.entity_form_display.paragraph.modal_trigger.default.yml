@@ -1,0 +1,101 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.modal_trigger.field_modal_trigger_cta
+    - field.field.paragraph.modal_trigger.field_modal_trigger_style
+    - paragraphs.paragraphs_type.modal_trigger
+  module:
+    - double_field
+    - field_group
+third_party_settings:
+  field_group:
+    group_tabs_content_group:
+      children:
+        - group_content
+        - group_options
+      parent_name: ''
+      weight: 0
+      format_type: tabs
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        direction: horizontal
+      label: 'Tabs - Content Group'
+    group_content:
+      children:
+        - field_modal_trigger_cta
+      parent_name: group_tabs_content_group
+      weight: 20
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Content
+    group_options:
+      children:
+        - field_modal_trigger_style
+        - status
+      parent_name: group_tabs_content_group
+      weight: 21
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Options
+id: paragraph.modal_trigger.default
+targetEntityType: paragraph
+bundle: modal_trigger
+mode: default
+content:
+  field_modal_trigger_cta:
+    weight: 2
+    settings:
+      inline: true
+      first:
+        type: textfield
+        label_display: block
+        size: 10
+        placeholder: ''
+        label: Ok
+        cols: 10
+        rows: 5
+        prefix: ''
+        suffix: ''
+      second:
+        type: textfield
+        label_display: block
+        size: 10
+        placeholder: ''
+        label: Ok
+        cols: 10
+        rows: 5
+        prefix: ''
+        suffix: ''
+    third_party_settings: {  }
+    type: double_field
+    region: content
+  field_modal_trigger_style:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  status:
+    type: boolean_checkbox
+    weight: 4
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+hidden:
+  created: true

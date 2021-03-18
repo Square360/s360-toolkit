@@ -23,11 +23,11 @@ function s360_toolkit_header_field_help($route_name, RouteMatchInterface $route_
       $output .= '<p>' . t('This formatter is the default and creates the HTML markup for the header.') . '</p>';
       $output .= '<h5>' . t('OUTPUT') . '</h5>';
       $output .= '<code>';
-      $output .= '&lt;header class="header-group"&gt;<br />';
-      $output .= '&nbsp;&nbsp;&lt;h2 class="header-group__heading"&gt;<br />';
-      $output .= '&nbsp;&nbsp;&nbsp;&nbsp;&lt;a href="optional-link" class="header-group__link"&gt;Heading Text&lt;/a&gt;<br />';
+      $output .= '&lt;header class="sthf-header"&gt;<br />';
+      $output .= '&nbsp;&nbsp;&lt;h2 class="sthf-header__heading"&gt;<br />';
+      $output .= '&nbsp;&nbsp;&nbsp;&nbsp;&lt;a href="optional-link" class="sthf-header__link"&gt;Heading Text&lt;/a&gt;<br />';
       $output .= '&nbsp;&nbsp;&lt;/h2&gt;<br />';
-      $output .= '&nbsp;&nbsp;&lt;div class="header-group__subtitle"&gt;Optional Subtitle&lt;/div&gt;<br />';
+      $output .= '&nbsp;&nbsp;&lt;div class="sthf-header__subtitle"&gt;Optional Subtitle&lt;/div&gt;<br />';
       $output .= '&lt;/header&gt;';
       $output .= '</code>';
       $output .= '<h4>' . t('Heading Text (Plain text)') . '</h4>';
@@ -40,19 +40,19 @@ function s360_toolkit_header_field_help($route_name, RouteMatchInterface $route_
       $output .= '<p>' . t('NOTE: All styles must be provided from the Drupal theme.') . '</p>';
 
       $output .= '<ul>';
-      $output .= '<li>.header-group--centered</li>';
-      $output .= '<li>.header-group--uppercase</li>';
-      $output .= '<li>.header-group--heading-2</li>';
-      $output .= '<li>.header-group--heading-3</li>';
-      $output .= '<li>.header-group--heading-4</li>';
-      $output .= '<li>.header-group--heading-5</li>';
-      $output .= '<li>.header-group--heading-6</li>';
+      $output .= '<li>.sthf-header--centered</li>';
+      $output .= '<li>.sthf-header--uppercase</li>';
+      $output .= '<li>.sthf-header--heading-2</li>';
+      $output .= '<li>.sthf-header--heading-3</li>';
+      $output .= '<li>.sthf-header--heading-4</li>';
+      $output .= '<li>.sthf-header--heading-5</li>';
+      $output .= '<li>.sthf-header--heading-6</li>';
       $output .= '</ul>';
 
       $output .= '<ul>';
-      $output .= '<li>.header-group__heading</li>';
-      $output .= '<li>.header-group__subtitle</li>';
-      $output .= '<li>.header-group__link</li>';
+      $output .= '<li>.sthf-header__heading</li>';
+      $output .= '<li>.sthf-header__subtitle</li>';
+      $output .= '<li>.sthf-header__link</li>';
       $output .= '</ul>';
 
       return $output;

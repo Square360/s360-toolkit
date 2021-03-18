@@ -1,0 +1,190 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.modal.field_modal_banish_text
+    - field.field.paragraph.modal.field_modal_frequency
+    - field.field.paragraph.modal.field_modal_par_modal_layout
+    - field.field.paragraph.modal.field_modal_position
+    - field.field.paragraph.modal.field_modal_scroll_delay
+    - field.field.paragraph.modal.field_modal_style
+    - field.field.paragraph.modal.field_modal_timer_delay
+    - field.field.paragraph.modal.field_modal_trigger
+    - paragraphs.paragraphs_type.modal
+  module:
+    - field_group
+    - layout_paragraphs
+third_party_settings:
+  field_group:
+    group_tabs_content_group:
+      children:
+        - group_content
+        - group_settings
+        - group_options
+      parent_name: ''
+      weight: 0
+      format_type: tabs
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        direction: horizontal
+      label: 'Tabs - Content Group'
+    group_settings:
+      children:
+        - group_tabs_settings_group
+      parent_name: group_tabs_content_group
+      weight: 21
+      format_type: tab
+      region: content
+      format_settings:
+        direction: horizontal
+        id: ''
+        classes: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+      label: Settings
+    group_content:
+      children:
+        - field_modal_par_modal_layout
+      parent_name: group_tabs_content_group
+      weight: 20
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Content
+    group_trigger:
+      children:
+        - field_modal_trigger
+        - field_modal_timer_delay
+        - field_modal_scroll_delay
+        - field_modal_frequency
+        - field_modal_banish_text
+      parent_name: group_tabs_settings_group
+      weight: 21
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Trigger
+    group_display:
+      children:
+        - field_modal_position
+        - field_modal_style
+      parent_name: group_tabs_settings_group
+      weight: 22
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Display
+    group_options:
+      children:
+        - status
+      parent_name: group_tabs_content_group
+      weight: 22
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: true
+      label: Options
+    group_tabs_settings_group:
+      children:
+        - group_trigger
+        - group_display
+      parent_name: group_settings
+      weight: 20
+      format_type: tabs
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        direction: horizontal
+      label: 'Tabs - Settings Group'
+id: paragraph.modal.default
+targetEntityType: paragraph
+bundle: modal
+mode: default
+content:
+  field_modal_banish_text:
+    weight: 25
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_modal_frequency:
+    weight: 24
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_modal_par_modal_layout:
+    type: layout_paragraphs
+    weight: 1
+    settings:
+      preview_view_mode: preview
+      nesting_depth: 1
+      require_layouts: 1
+    third_party_settings: {  }
+    region: content
+  field_modal_position:
+    weight: 22
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_modal_scroll_delay:
+    weight: 23
+    settings: {  }
+    third_party_settings:
+      conditional_fields: {  }
+    type: options_select
+    region: content
+  field_modal_style:
+    weight: 23
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_modal_timer_delay:
+    weight: 22
+    settings: {  }
+    third_party_settings:
+      conditional_fields: {  }
+    type: options_select
+    region: content
+  field_modal_trigger:
+    weight: 21
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  status:
+    type: boolean_checkbox
+    weight: 0
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+hidden:
+  created: true
