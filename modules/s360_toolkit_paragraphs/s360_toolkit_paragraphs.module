@@ -34,9 +34,9 @@ function s360_toolkit_paragraphs_help($route_name, RouteMatchInterface $route_ma
 }
 
 /**
- * Implements hook_help().
+ * Implements hook_preprocess_paragraph().
  */
-function s360_toolkit_paragraphs_preprocess_paragraphs(&$variables) {
+function s360_toolkit_paragraphs_preprocess_paragraph(&$variables) {
   $elements = $variables['elements'];
 
   if (isset($elements['#paragraph'])) {
