@@ -30,6 +30,19 @@ function s360_toolkit_layout_builder_layout_alter(&$definitions) {
 }
 
 /**
+ * Implements hook_theme().
+ */
+function s360_toolkit_layout_builder_theme($existing, $type, $theme, $path) {
+  return [
+    'paragraph__layout_section' => [
+      'template' => 'paragraph--layout-section' ,
+      'base hook' => 'paragraph',
+      'path' => drupal_get_path('module', 's360_toolkit_layout_builder') . '/templates',
+    ],
+  ];
+}
+
+/**
  * Implements hook_page_attachments_alter().
  */
 function s360_toolkit_layout_builder_page_attachments_alter(array &$attachments) {
@@ -61,15 +74,5 @@ function s360_toolkit_layout_builder_preprocess_paragraph__layout_section(&$vari
         }
       }
     }
-  }
-}
-
-/**
- * Implements hook_theme_registry_alter().
- */
-function s360_toolkit_layout_builder_theme_registry_alter(&$theme_registry) {
-  if (isset($theme_registry['paragraph__layout_section'])) {
-    $theme_registry['paragraph__layout_section']['path'] = drupal_get_path('module', 's360_toolkit_layout_builder') . '/templates';
-    $theme_registry['paragraph__layout_section']['template'] = 'paragraph--layout-section';
   }
 }

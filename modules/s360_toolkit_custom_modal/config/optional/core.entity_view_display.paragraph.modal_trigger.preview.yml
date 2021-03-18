@@ -1,0 +1,50 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.modal_trigger.field_modal_trigger_cta
+    - field.field.paragraph.modal_trigger.field_modal_trigger_style
+    - paragraphs.paragraphs_type.modal_trigger
+  module:
+    - double_field
+    - options
+id: paragraph.modal_trigger.preview
+targetEntityType: paragraph
+bundle: modal_trigger
+mode: preview
+content:
+  field_modal_trigger_cta:
+    weight: 0
+    label: hidden
+    settings:
+      first:
+        prefix: ''
+        suffix: ''
+        link: false
+        format_type: medium
+        hidden: false
+        thousand_separator: ''
+        decimal_separator: .
+        scale: 2
+      second:
+        hidden: true
+        prefix: ''
+        suffix: ''
+        link: false
+        format_type: medium
+        thousand_separator: ''
+        decimal_separator: .
+        scale: 2
+      inline: false
+    third_party_settings: {  }
+    type: double_field_unformatted_list
+    region: content
+  field_modal_trigger_style:
+    type: list_default
+    weight: 1
+    region: content
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

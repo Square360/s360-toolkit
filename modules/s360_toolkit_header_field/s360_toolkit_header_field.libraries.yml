@@ -1,5 +1,7 @@
-s360-toolkit-header-field:
+s360-toolkit-header-field.admin:
   version: VERSION
   css:
-    layout:
-      assets/css/header-field.css: {}
+    theme:
+      assets/dist/css/s360-toolkit-header-field.min.css: {}
+  js:
+    assets/dist/js/s360-toolkit-header-field.min.js: {}

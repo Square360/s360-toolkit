@@ -1,0 +1,67 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_modal_par_modal_layout
+    - paragraphs.paragraphs_type.html_content
+    - paragraphs.paragraphs_type.image
+    - paragraphs.paragraphs_type.modal
+    - paragraphs.paragraphs_type.modal_layout
+    - paragraphs.paragraphs_type.modal_trigger
+    - paragraphs.paragraphs_type.video
+    - paragraphs.paragraphs_type.webform
+  module:
+    - entity_reference_revisions
+id: paragraph.modal.field_modal_par_modal_layout
+field_name: field_modal_par_modal_layout
+entity_type: paragraph
+bundle: modal
+label: Layouts
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      html_content: html_content
+      modal_layout: modal_layout
+      image: image
+      modal_trigger: modal_trigger
+      video: video
+      webform: webform
+    target_bundles_drag_drop:
+      header:
+        weight: 11
+        enabled: false
+      html_content:
+        enabled: true
+        weight: 5
+      image:
+        enabled: true
+        weight: 13
+      layout_section:
+        weight: 6
+        enabled: false
+      modal:
+        weight: 7
+        enabled: false
+      modal_layout:
+        enabled: true
+        weight: 8
+      modal_trigger:
+        enabled: true
+        weight: 17
+      video:
+        enabled: true
+        weight: 18
+      view_block:
+        weight: 19
+        enabled: false
+      webform:
+        enabled: true
+        weight: 20
+field_type: entity_reference_revisions

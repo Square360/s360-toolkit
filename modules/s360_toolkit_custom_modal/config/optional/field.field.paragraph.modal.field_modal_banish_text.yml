@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_modal_banish_text
+    - paragraphs.paragraphs_type.modal
+id: paragraph.modal.field_modal_banish_text
+field_name: field_modal_banish_text
+entity_type: paragraph
+bundle: modal
+label: 'Banish Text'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

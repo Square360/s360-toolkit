@@ -1,0 +1,27 @@
+{%
+  set classes = [
+    'stcm-modal',
+    'stcm-modal--hidden',
+    not paragraph.isPublished() ? 'stcm-modal--unpublished',
+    is_front ? 'stcm-modal--is-front',
+  ]
+%}
+<section{{ attributes.addClass(classes) }}>
+  <div class="stcm-modal__dialog">
+    <div class="stcm-modal__content">
+      {% if content.field_modal_par_modal_layout.0 %}
+        {{- content.field_modal_par_modal_layout -}}
+      {% endif %}
+    </div>
+
+    {% if content.field_modal_banish_text.0 %}
+      <button
+        aria-label="{{- content.field_modal_banish_text.0 -}}"
+        class="stcm-modal__banish-button"
+        title="{{- content.field_modal_banish_text.0 -}}"
+      >{{- content.field_modal_banish_text.0 -}}</button>
+    {% endif %}
+
+    <button class="stcm-modal__close-button"></button>
+  </div>
+</section>

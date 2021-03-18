@@ -1,0 +1,25 @@
+uuid: d0104f88-ac54-4967-94ed-4098d5390e0c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.modal_layout.field_modal_layout_header
+    - paragraphs.paragraphs_type.modal_layout
+  module:
+    - s360_toolkit_header_field
+id: paragraph.modal_layout.default
+targetEntityType: paragraph
+bundle: modal_layout
+mode: default
+content:
+  field_modal_layout_header:
+    weight: 0
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: header_field
+    region: content
+hidden:
+  created: true
+  status: true

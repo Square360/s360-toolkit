@@ -44,9 +44,9 @@ class SemanticFormatter extends Base {
         '#tag' => 'header',
         '#attributes' => [
           'class' => [
-            'header-group',
-            ($options['center'] ? 'header-group--centered' : ''),
-            ($options['uppercase'] ? 'header-group--uppercase' : ''),
+            'sthf-header',
+            ($options['center'] ? 'sthf-header--centered' : ''),
+            ($options['uppercase'] ? 'sthf-header--uppercase' : ''),
             ($options['class'] ? $this->formatClass($options['class']) : ''),
           ],
         ],
