@@ -1,0 +1,41 @@
+.header-field {
+  width: 100%;
+
+  > .details-wrapper {
+    border: 1px solid #999;
+    margin-bottom: 1rem;
+    padding: 0;
+  }
+
+  &__heading-group {
+    width: 100%;
+
+    .fieldset-wrapper {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 20px;
+
+      select {
+        min-width: 100%;
+      }
+    }
+
+    [class*="subtitle"] {
+      grid-column: span 2;
+    }
+  }
+
+  &__options-group {
+    width: 100%;
+
+    .fieldset-wrapper {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: 1fr 1fr;
+
+      > * {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

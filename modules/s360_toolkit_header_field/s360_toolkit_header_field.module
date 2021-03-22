@@ -58,3 +58,13 @@ function s360_toolkit_header_field_help($route_name, RouteMatchInterface $route_
       return $output;
   }
 }
+
+/**
+ * Implements hook_page_attachments_alter().
+ */
+function s360_toolkit_header_field_page_attachments_alter(array &$attachments) {
+  // Attach the "admin" library only when the route IS the admin.
+  if (\Drupal::service('router.admin_context')->isAdminRoute()) {
+    $attachments['#attached']['library'][] = 's360_toolkit_header_field/s360-toolkit-header-field.admin';
+  }
+}
