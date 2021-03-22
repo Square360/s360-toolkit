@@ -1,9 +1,9 @@
 interface IModalSettings {
   trigger: string;
-  scroll_delay: number;
-  timer_delay: number;
+  scroll_delay?: number;
+  timer_delay?: number;
   frequency: number;
-  style: string;
+  position: string;
 };
 
 interface IModal {
@@ -72,6 +72,7 @@ class Modal {
   private _closeButton: HTMLElement | null;
   private _firstFocusableElement: HTMLElement | null;
   private _lastFocusableElement: HTMLElement | null;
+  private _lastFocusedElement: HTMLElement | null;
 
   constructor(public modal: IModal) {
     this.id = modal && modal.id;
@@ -84,6 +85,7 @@ class Modal {
 
     this._firstFocusableElement = null;
     this._lastFocusableElement = null;
+    this._lastFocusedElement = null;
 
     this._banishButton?.addEventListener('click', () => {
       this.hide();
@@ -95,7 +97,7 @@ class Modal {
     });
 
     // Attach a keydown listener only when the modal isn't attached to the frame.
-    if (this.settings.style.indexOf('frame') === -1) {
+    if (this.settings.position.indexOf('frame') === -1) {
       this.element.addEventListener('keydown', this._handleKeyDown.bind(null, this));
 
       this.element.addEventListener('click', (event: MouseEvent) => {
@@ -121,10 +123,12 @@ class Modal {
    * Show the modal.
    */
   public show(): void {
+    this._lastFocusedElement = document.activeElement as HTMLElement;
+
     setModalTimeout(this.storageKey, this.settings.frequency);
 
     // Focus on the first element only when the modal isn't attached to the frame.
-    if (this.settings.style.indexOf('frame') === -1) {
+    if (this.settings.position.indexOf('frame') === -1) {
       setTimeout(() => {
         this._firstFocusableElement?.focus();
       }, 500);
@@ -142,6 +146,10 @@ class Modal {
     // Make the modal invisible.
     this.element.setAttribute('aria-hidden', 'true');
     this.element.classList.add('stcm-modal--hidden');
+
+    if (this._lastFocusedElement) {
+      this._lastFocusedElement.focus();
+    }
   }
 
   private _handleKeyDown(modal: Modal, event: KeyboardEvent) {
@@ -211,7 +219,7 @@ class ScrollModal extends Modal {
         // Clamp value between 0 and 100
         let scrollPercentage = Math.round(Math.min(Math.max(0, (scrollTop / ( scrollHeight - innerHeight)) * 100), 100));
 
-        if (scrollPercentage >= this.settings.scroll_delay) {
+        if (this.settings.scroll_delay && (scrollPercentage >= this.settings.scroll_delay)) {
           this.show();
 
           window.removeEventListener('scroll', scroll);
@@ -230,9 +238,11 @@ class TimerModal extends Modal {
   constructor(modal: IModal) {
     super(modal);
 
-    setTimeout(() => {
-      this.show();
-    }, this.settings.timer_delay * 1000);
+    if (this.settings.timer_delay) {
+      setTimeout(() => {
+        this.show();
+      }, this.settings.timer_delay * 1000);
+    }
   }
 }
 
@@ -245,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
   PARAGRAPH_MODALS.forEach((paragraphModal: Element) => {
     let modal: IModal = {
       id: paragraphModal.getAttribute('id'),
-      element: paragraphModal,
+      element: paragraphModal as HTMLElement,
       settings: JSON.parse(paragraphModal.getAttribute('data-modal-settings') || '{}'),
       storageKey: `modal.${ paragraphModal.getAttribute('id') }`,
     };
