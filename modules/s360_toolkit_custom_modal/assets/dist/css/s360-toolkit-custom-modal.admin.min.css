@@ -16,7 +16,7 @@
 .paragraph-type--modal .field--name-field-modal-position label {
   width: 100%;
 }
-.paragraph-type--modal .field--name-field-modal-position .select {
+.paragraph-type--modal .field--name-field-modal-position select {
   margin-right: 20px;
 }
 .paragraph-type--modal .field--name-field-modal-position img {

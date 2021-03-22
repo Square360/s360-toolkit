@@ -70,7 +70,7 @@ third_party_settings:
         - field_modal_frequency
         - field_modal_banish_text
       parent_name: group_tabs_settings_group
-      weight: 21
+      weight: 23
       format_type: tab
       region: content
       format_settings:
@@ -111,8 +111,8 @@ third_party_settings:
       label: Options
     group_tabs_settings_group:
       children:
-        - group_trigger
         - group_display
+        - group_trigger
       parent_name: group_settings
       weight: 20
       format_type: tabs
@@ -154,7 +154,7 @@ content:
     weight: 27
     settings:
       preview_view_mode: preview
-      nesting_depth: 1
+      nesting_depth: 0
       require_layouts: 1
     third_party_settings: {  }
     region: content
