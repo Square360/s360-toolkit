@@ -4,6 +4,7 @@ dependencies:
   config:
     - field.field.paragraph.modal.field_modal_banish_text
     - field.field.paragraph.modal.field_modal_frequency
+    - field.field.paragraph.modal.field_modal_header
     - field.field.paragraph.modal.field_modal_par_modal_layout
     - field.field.paragraph.modal.field_modal_position
     - field.field.paragraph.modal.field_modal_scroll_delay
@@ -14,6 +15,7 @@ dependencies:
   module:
     - field_group
     - layout_paragraphs
+    - s360_toolkit_header_field
 third_party_settings:
   field_group:
     group_tabs_content_group:
@@ -47,6 +49,7 @@ third_party_settings:
       label: Settings
     group_content:
       children:
+        - field_modal_header
         - field_modal_par_modal_layout
       parent_name: group_tabs_content_group
       weight: 20
@@ -138,9 +141,17 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
+  field_modal_header:
+    weight: 26
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: header_field
+    region: content
   field_modal_par_modal_layout:
     type: layout_paragraphs
-    weight: 1
+    weight: 27
     settings:
       preview_view_mode: preview
       nesting_depth: 1

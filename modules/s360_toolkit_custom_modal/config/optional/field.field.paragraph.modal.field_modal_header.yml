@@ -1,15 +1,16 @@
+uuid: 20d780d1-b564-4402-8928-fddbf308dd98
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_modal_layout_header
-    - paragraphs.paragraphs_type.modal_layout
+    - field.storage.paragraph.field_modal_header
+    - paragraphs.paragraphs_type.modal
   module:
     - s360_toolkit_header_field
-id: paragraph.modal_layout.field_modal_layout_header
-field_name: field_modal_layout_header
+id: paragraph.modal.field_modal_header
+field_name: field_modal_header
 entity_type: paragraph
-bundle: modal_layout
+bundle: modal
 label: Header
 description: ''
 required: false
