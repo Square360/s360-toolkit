@@ -69,6 +69,9 @@ abstract class Base extends LinkFormatter {
         'class' => [
           'sthf-header__heading',
         ],
+        'id' => [
+          'sthf-header-' . hash('adler32', $heading_text),
+        ],
       ],
     ];
 

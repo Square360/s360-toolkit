@@ -11,7 +11,7 @@ field_name: field_modal_trigger
 entity_type: paragraph
 bundle: modal
 label: Trigger
-description: ''
+description: 'Choose how this modal will be triggered to display. For manual triggers, please take note of the Modal ID displayed. You must save the modal with a manual trigger first in order to get a Modal Id to use for the trigger.'
 required: true
 translatable: false
 default_value: {  }

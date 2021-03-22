@@ -1,6 +1,26 @@
 /*!
  * @client: Square360
  * @version: 1.0.0
- * @build: 2021-03-18 | 134507
+ * @build: 2021-03-20 | 195016
  */
+.paragraph-type--modal .field--name-field-modal-position .form-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+.paragraph-type--modal .field--name-field-modal-position label {
+  width: 100%;
+}
+.paragraph-type--modal .field--name-field-modal-position select {
+  margin-right: 20px;
+}
+.paragraph-type--modal .field--name-field-modal-position img {
+  height: 200px;
+}
 
+/*# sourceMappingURL=s360-toolkit-custom-modal.admin.min.css.map*/

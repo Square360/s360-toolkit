@@ -1,11 +1,12 @@
+uuid: 92d6b890-9892-480c-bda3-69a060faf6c4
 langcode: en
 status: true
 dependencies:
   module:
     - paragraphs
     - s360_toolkit_header_field
-id: paragraph.field_modal_layout_header
-field_name: field_modal_layout_header
+id: paragraph.field_modal_header
+field_name: field_modal_header
 entity_type: paragraph
 type: header_field
 settings:

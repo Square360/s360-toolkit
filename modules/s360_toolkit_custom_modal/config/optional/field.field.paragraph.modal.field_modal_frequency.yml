@@ -11,7 +11,7 @@ field_name: field_modal_frequency
 entity_type: paragraph
 bundle: modal
 label: Frequency
-description: ''
+description: 'How often a modal will re-display after being dismissed.'
 required: false
 translatable: false
 default_value: {  }

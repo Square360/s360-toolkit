@@ -5,6 +5,8 @@
  * s360_toolkit_custom_modal.module
  */
 
+use Drupal\Core\Form\FormStateInterface;
+
 /**
  * Implements hook_page_attachments_alter().
  */
@@ -78,41 +80,50 @@ function s360_toolkit_custom_modal_preprocess_paragraph__modal(&$variables) {
     if ($paragraph->hasField('field_modal_position')) {
       $field_modal_position = $paragraph->get('field_modal_position');
     }
+    if ($paragraph->hasField('field_modal_header')) {
+      $field_modal_header = $paragraph->get('field_modal_header');
+    }
 
-    $modal_settings = [
-      'trigger' => isset($field_modal_trigger)
-        ? ($field_modal_trigger->count()
-          ? $field_modal_trigger->getString()
-          : '')
-        : '',
-      'scroll_delay' => isset($field_modal_scroll_delay)
-        ? ($field_modal_scroll_delay->count()
-          ? intval($field_modal_scroll_delay->getString())
-          : 0)
-        : 0,
-      'timer_delay' => isset($field_modal_timer_delay)
-        ? ($field_modal_timer_delay->count()
-          ? intval($field_modal_timer_delay->getString())
-          : 0)
-        : 0,
-      'frequency' => isset($field_modal_frequency)
-        ? ($field_modal_frequency->count()
-          ? intval($field_modal_frequency->getString())
-          : 0)
-        : 0,
-      'style' => isset($field_modal_position)
-        ? ($field_modal_position->count()
-          ? $field_modal_position->getString()
-          : '')
-        : '',
-    ];
+    $modal_settings = [];
 
-    if ($field_modal_style->count()) {
+    if (isset($field_modal_trigger)) {
+      $modal_settings['trigger'] = $field_modal_trigger->getString();
+    }
+
+    if (isset($field_modal_scroll_delay)) {
+      if ($field_modal_scroll_delay->count()) {
+        $modal_settings['scroll_delay'] = intval($field_modal_scroll_delay->getString());
+      }
+    }
+
+    if (isset($field_modal_timer_delay)) {
+      if ($field_modal_timer_delay->count()) {
+        $modal_settings['timer_delay'] = intval($field_modal_timer_delay->getString());
+      }
+    }
+
+    if (isset($field_modal_frequency)) {
+      $modal_settings['frequency'] = intval($field_modal_frequency->getString());
+    }
+
+    if (isset($field_modal_position)) {
+      $modal_settings['position'] = $field_modal_position->getString();
+    }
+    
+    if (isset($field_modal_style) && $field_modal_style->count()) {
       $variables['attributes']['class'][] = 'stcm-modal--style-' . $field_modal_style->getString();
     }
 
-    if ($field_modal_position->count()) {
+    if (isset($field_modal_position) && $field_modal_position->count()) {
       $variables['attributes']['class'][] = 'stcm-modal--position-' . $field_modal_position->getString();
+    }
+
+    if (isset($field_modal_header) && $field_modal_header->count()) {
+      $field_modal_header_items = $field_modal_header->view();
+      $field_modal_header_header_tag = $field_modal_header_items[0];
+      $field_modal_header_heading_tag = $field_modal_header_header_tag[0];
+
+      $variables['attributes']['aria-labelledby'] = reset($field_modal_header_heading_tag['#attributes']['id']);
     }
 
     $variables['attributes']['data-modal-settings'] = json_encode($modal_settings);
@@ -182,6 +193,62 @@ function s360_toolkit_custom_modal_preprocess_paragraph__modal_trigger(&$variabl
           ];
         }
       }
+    }
+  }
+}
+
+/**
+ * Implements hook_field_widget_paragraphs_form_alter().
+ */
+function s360_toolkit_custom_modal_field_widget_paragraphs_form_alter(&$element, FormStateInterface &$form_state, $context) {
+  if ($element['#paragraph_type'] == 'modal') {
+    $field_modal_scroll_delay = &$element['subform']['field_modal_scroll_delay'];
+    $field_modal_timer_delay = &$element['subform']['field_modal_timer_delay'];
+    $field_modal_banish_text = &$element['subform']['field_modal_banish_text'];
+    $field_modal_frequency = &$element['subform']['field_modal_frequency'];
+
+    if (isset($field_modal_scroll_delay)) {
+      $field_modal_scroll_delay['widget']['#states'] = [
+        'visible' => [
+          'select[name*="[field_modal_trigger]"]' => ['value' => 'scroll'],
+        ],
+        'required' => [
+          'select[name*="[field_modal_trigger]"]' => ['value' => 'scroll'],
+        ]
+      ];
+    }
+
+    if (isset($field_modal_timer_delay)) {
+      $field_modal_timer_delay['widget']['#states'] = [
+        'visible' => [
+          'select[name*="[field_modal_trigger]"]' => ['value' => 'timer'],
+        ],
+        'required' => [
+          'select[name*="[field_modal_trigger]"]' => ['value' => 'timer'],
+        ]
+      ];
+    }
+
+    if (isset($field_modal_banish_text)) {
+      $field_modal_banish_text['widget'] = reset($field_modal_banish_text['widget']);
+      $field_modal_banish_text['widget']['value']['#states'] = [
+        'visible' => [
+          'select[name*="[field_modal_frequency]"]' => ['!value' => -1],
+          'or',
+          'select[name*="[field_modal_trigger]"]' => ['!value' => 'manual']
+        ]
+      ];
+    }
+
+    if (isset($field_modal_frequency)) {
+      $field_modal_frequency['widget']['#states'] = [
+        'visible' => [
+          'select[name*="[field_modal_trigger]"]' => ['!value' => 'manual'],
+        ],
+        'required' => [
+          'select[name*="[field_modal_trigger]"]' => ['!value' => 'manual'],
+        ]
+      ];
     }
   }
 }
