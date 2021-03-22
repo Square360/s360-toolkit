@@ -11,7 +11,7 @@ field_name: field_modal_position
 entity_type: paragraph
 bundle: modal
 label: Position
-description: ''
+description: '<img src="http://media.square360.com/s360-toolkit/modal-position-illustration.svg">'
 required: true
 translatable: false
 default_value: {  }

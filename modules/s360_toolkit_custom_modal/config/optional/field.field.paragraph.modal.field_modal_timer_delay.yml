@@ -11,7 +11,7 @@ field_name: field_modal_timer_delay
 entity_type: paragraph
 bundle: modal
 label: 'Timer Delay'
-description: ''
+description: 'How long after the page loads that he modal istriggered to display.'
 required: false
 translatable: false
 default_value: {  }

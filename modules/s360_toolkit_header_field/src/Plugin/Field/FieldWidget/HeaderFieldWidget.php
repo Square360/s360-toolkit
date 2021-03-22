@@ -42,11 +42,11 @@ class HeaderFieldWidget extends LinkWidget {
 
     $element = parent::formElement($items, $delta, $element, $form, $form_state);
 
-    // Attach the admin styles for the "header-field".
-    $element['#attached']['library'][] = 's360_toolkit_header_field/s360-toolkit-header-field';
     $element['#attributes'] = [
       'class' => ['header-field'],
     ];
+    $element['#type'] = 'details';
+    $element['#open'] = TRUE;
 
     // Rename the title field's title.
     $element['title']['#title'] = 'Heading text';
@@ -77,7 +77,7 @@ class HeaderFieldWidget extends LinkWidget {
     $element['heading_group']['title'] = $element['title'];
 
     // Subtitle is not part of heading group.
-    $element['subtitle'] = [
+    $element['heading_group']['subtitle'] = [
       '#title' => t('Subtitle text'),
       '#type' => 'textfield',
       '#default_value' => $item->subtitle ?? '',
@@ -160,7 +160,7 @@ class HeaderFieldWidget extends LinkWidget {
 
     // Set the title with the title's value from the heading_group.
     $values['title'] = $element['heading_group']['title']['#value'];
-    $values['subtitle'] = $element['subtitle']['#value'];
+    $values['subtitle'] = $element['heading_group']['subtitle']['#value'];
 
     $form_state->setValueForElement($element, $values);
   }

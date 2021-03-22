@@ -4,6 +4,7 @@ dependencies:
   config:
     - field.field.paragraph.modal.field_modal_banish_text
     - field.field.paragraph.modal.field_modal_frequency
+    - field.field.paragraph.modal.field_modal_header
     - field.field.paragraph.modal.field_modal_par_modal_layout
     - field.field.paragraph.modal.field_modal_position
     - field.field.paragraph.modal.field_modal_scroll_delay
@@ -13,51 +14,38 @@ dependencies:
     - paragraphs.paragraphs_type.modal
   module:
     - layout_paragraphs
-    - options
+    - s360_toolkit_header_field
 id: paragraph.modal.default
 targetEntityType: paragraph
 bundle: modal
 mode: default
 content:
-  field_modal_banish_text:
-    weight: 3
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    type: string
-    region: content
-  field_modal_frequency:
-    weight: 2
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: list_default
-    region: content
-  field_modal_par_modal_layout:
-    type: layout_paragraphs
+  field_modal_header:
     weight: 0
     label: hidden
     settings:
-      view_mode: default
-      link: ''
+      trim_length: ''
+      url_only: ''
+      url_plain: ''
+      rel: 0
+      target: 0
     third_party_settings: {  }
+    type: header_field_semantic
     region: content
-  field_modal_position:
-    weight: 5
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: list_default
-    region: content
-  field_modal_style:
+  field_modal_par_modal_layout:
+    type: layout_paragraphs
     weight: 1
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: list_default
     region: content
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
 hidden:
+  field_modal_banish_text: true
+  field_modal_frequency: true
+  field_modal_position: true
   field_modal_scroll_delay: true
+  field_modal_style: true
   field_modal_timer_delay: true
   field_modal_trigger: true
