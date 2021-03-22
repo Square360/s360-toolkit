@@ -1,38 +1,45 @@
 /*!
  * @client: Square360
  * @version: 1.0.0
- * @build: 2021-03-18 | 134013
+ * @build: 2021-03-22 | 105557
  */
-.header-field > .fieldset-wrapper {
-  border: 1px solid #666;
-  padding: 1rem;
-  margin: 0;
+.header-field {
+  width: 100%;
 }
-.header-field > .fieldset-wrapper .header-field__heading-group,
-.header-field > .fieldset-wrapper .header-field__options-group {
+.header-field > .details-wrapper {
+  border: 1px solid #999;
+  margin-bottom: 1rem;
   padding: 0;
-  margin: 0;
 }
-.header-field .header-field__heading-group legend,
-.header-field .header-field__options-group legend {
-  display: none;
+.header-field__heading-group {
+  width: 100%;
 }
-.header-field .header-field__heading-group .fieldset-wrapper {
+.header-field__heading-group .fieldset-wrapper {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: auto 1fr;
   grid-template-columns: auto 1fr;
   gap: 20px;
 }
-.header-field .header-field__heading-group .fieldset-wrapper select {
-  min-width: unset;
+.header-field__heading-group .fieldset-wrapper select {
+  min-width: 100%;
 }
-.header-field .header-field__options-group .fieldset-wrapper {
+.header-field__heading-group [class*=subtitle] {
+  -ms-grid-column-span: 2;
+  grid-column: span 2;
+}
+.header-field__options-group {
+  width: 100%;
+}
+.header-field__options-group .fieldset-wrapper {
   display: -ms-grid;
   display: grid;
   gap: 20px;
   -ms-grid-columns: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
+}
+.header-field__options-group .fieldset-wrapper > * {
+  margin-bottom: 0;
 }
 
 /*# sourceMappingURL=s360-toolkit-header-field.admin.min.css.map*/
