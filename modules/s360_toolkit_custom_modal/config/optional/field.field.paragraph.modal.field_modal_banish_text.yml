@@ -9,7 +9,7 @@ field_name: field_modal_banish_text
 entity_type: paragraph
 bundle: modal
 label: 'Banish Text'
-description: ''
+description: 'If there is text in this field, it will show a button that will allow the user to <b>permanently</b> banish this modal. This text will show as a tool-tip and be read by screen readers'
 required: false
 translatable: false
 default_value: {  }

@@ -11,7 +11,7 @@ field_name: field_modal_scroll_delay
 entity_type: paragraph
 bundle: modal
 label: 'Scroll Delay'
-description: ''
+description: 'How far down a page you scroll before triggering the modal.'
 required: false
 translatable: false
 default_value: {  }
