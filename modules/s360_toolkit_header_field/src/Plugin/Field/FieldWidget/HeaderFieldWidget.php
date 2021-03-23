@@ -58,26 +58,25 @@ class HeaderFieldWidget extends LinkWidget {
     }
 
     // Start heading group.
-    $element['heading_group'] = [
+    $element['text_group'] = [
       '#type' => 'fieldset',
-      '#title' => t('Heading'),
+      '#title' => t('Text'),
       '#attributes' => [
-        'class' => ['header-field__heading-group'],
+        'class' => ['header-field__text-group'],
       ],
     ];
 
     $semantic_tag_options = array_intersect_key(HeaderFieldItem::AVAILABLE_TAGS, array_flip($this->getFieldSetting('allowed_tags')));
 
-    $element['heading_group']['heading_tag'] = [
+    $element['text_group']['heading_tag'] = [
       '#title' => t('Semantic Tag'),
       '#type' => 'select',
       '#options' => $semantic_tag_options,
       '#default_value' => $item->options['heading_tag'] ?? 'h2',
     ];
-    $element['heading_group']['title'] = $element['title'];
+    $element['text_group']['title'] = $element['title'];
 
-    // Subtitle is not part of heading group.
-    $element['heading_group']['subtitle'] = [
+    $element['text_group']['subtitle'] = [
       '#title' => t('Subtitle text'),
       '#type' => 'textfield',
       '#default_value' => $item->subtitle ?? '',
@@ -158,9 +157,9 @@ class HeaderFieldWidget extends LinkWidget {
       $values['uri'] = $element['options_group']['link_group']['uri']['#value'];
     }
 
-    // Set the title with the title's value from the heading_group.
-    $values['title'] = $element['heading_group']['title']['#value'];
-    $values['subtitle'] = $element['heading_group']['subtitle']['#value'];
+    // Set the title with the title's value from the text_group.
+    $values['title'] = $element['text_group']['title']['#value'];
+    $values['subtitle'] = $element['text_group']['subtitle']['#value'];
 
     $form_state->setValueForElement($element, $values);
   }
@@ -172,7 +171,7 @@ class HeaderFieldWidget extends LinkWidget {
     $values = $form_state->getValue($element['#parents']);
 
     $values['options'] = [
-      'heading_tag' => $element['heading_group']['heading_tag']['#value'],
+      'heading_tag' => $element['text_group']['heading_tag']['#value'],
       'center' => $element['options_group']['display_group']['center']['#value'],
       'uppercase' => $element['options_group']['display_group']['uppercase']['#value'],
       'class' => $element['options_group']['display_group']['class']['#value'],

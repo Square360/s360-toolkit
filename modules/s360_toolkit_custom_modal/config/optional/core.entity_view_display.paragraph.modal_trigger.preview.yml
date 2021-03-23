@@ -16,7 +16,7 @@ mode: preview
 content:
   field_modal_trigger_cta:
     weight: 0
-    label: hidden
+    label: inline
     settings:
       first:
         prefix: ''
@@ -44,7 +44,7 @@ content:
     type: list_default
     weight: 1
     region: content
-    label: above
+    label: inline
     settings: {  }
     third_party_settings: {  }
 hidden: {  }
