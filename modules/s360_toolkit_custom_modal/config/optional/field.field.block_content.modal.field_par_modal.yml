@@ -1,0 +1,57 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.modal
+    - field.storage.block_content.field_par_modal
+    - paragraphs.paragraphs_type.modal
+  module:
+    - entity_reference_revisions
+id: block_content.modal.field_par_modal
+field_name: field_par_modal
+entity_type: block_content
+bundle: modal
+label: Modal
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      modal: modal
+    target_bundles_drag_drop:
+      header:
+        weight: 11
+        enabled: false
+      html_content:
+        weight: 12
+        enabled: false
+      image:
+        weight: 13
+        enabled: false
+      layout_section:
+        weight: 14
+        enabled: false
+      modal:
+        enabled: true
+        weight: 15
+      modal_layout:
+        weight: 16
+        enabled: false
+      modal_trigger:
+        weight: 17
+        enabled: false
+      video:
+        weight: 18
+        enabled: false
+      view_block:
+        weight: 19
+        enabled: false
+      webform:
+        weight: 20
+        enabled: false
+field_type: entity_reference_revisions

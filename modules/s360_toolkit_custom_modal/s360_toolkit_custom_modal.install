@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * @file
+ * s360_toolkit_custom_modal.install
+ */
+
+use \Drupal\Core\Config\FileStorage;
+
+/**
+ * Adds configuration using the modal paragraph inside a block.
+ */
+function s360_toolkit_custom_modal_update_8001() {
+  $config_path = drupal_get_path('module', 's360_toolkit_custom_modal') . '/config/optional';
+  $source = new FileStorage($config_path);
+  $config_storage = \Drupal::service('config.storage');
+
+  try {
+    $config_storage->write('block_content.type.modal', $source->read('block_content.type.modal'));
+
+    \Drupal::entityTypeManager()->getStorage('field_storage_config')
+      ->create($source->read('field.storage.block_content.field_par_modal'))
+      ->save();
+
+    \Drupal::entityTypeManager()->getStorage('field_config')
+      ->create($source->read('field.field.block_content.modal.field_par_modal'))
+      ->save();
+
+    $config_files = [
+      'core.entity_form_display.block_content.modal.default',
+      'core.entity_view_display.block_content.modal.default',
+    ];
+
+    foreach ($config_files as $config_file) {
+      try {
+        $config_storage->write($config_file, $source->read($config_file));
+      }
+      catch (Exception $e) {
+        // Generic exception handling if something else gets thrown.
+        \Drupal::logger('s360_toolkit_custom_modal')->error($e->getMessage());
+      }
+    }
+  }
+  catch(Exception $e) {
+    // Generic exception handling if something else gets thrown.
+    \Drupal::logger('s360_toolkit_custom_modal')->error($e->getMessage());
+  }
+
+  drupal_flush_all_caches();
+}
