@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Markup;
 
 /**
  * Implements hook_page_attachments_alter().
@@ -172,7 +173,7 @@ function s360_toolkit_custom_modal_preprocess_paragraph__modal_trigger(&$variabl
               ],
               'aria-controls' => $field_modal_trigger_cta_value['second'],
             ],
-            '#value' => $field_modal_trigger_cta_value['first'],
+            '#value' => Markup::create('<span>' . $field_modal_trigger_cta_value['first'] . '</span>'),
           ];
         }
       }
