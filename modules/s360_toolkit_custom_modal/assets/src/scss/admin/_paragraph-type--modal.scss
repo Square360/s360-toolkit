@@ -4,18 +4,24 @@
       display: flex;
       flex-wrap: wrap;
       align-items: flex-start;
+
+      label {
+        width: 100%;
+      }
+
+      select {
+        margin-right: 20px;
+      }
+
+      .description > img {
+        height: 200px;
+        margin-right: 20px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
     }
 
-    label {
-      width: 100%;
-    }
-
-    select {
-      margin-right: 20px;
-    }
-
-    img {
-      height: 200px;
-    }
   }
 }
