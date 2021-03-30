@@ -194,18 +194,20 @@ class ManualModal extends Modal {
 
     const TRIGGER_BUTTONS = document.querySelectorAll(`[aria-controls="${ this.id }"]`);
 
-    TRIGGER_BUTTONS.forEach((modalTriggerButton: Element) => {
-      modalTriggerButton.addEventListener('click', () => {
-        this.show();
+    if (TRIGGER_BUTTONS) {
+      TRIGGER_BUTTONS.forEach((modalTriggerButton: Element) => {
+        modalTriggerButton.addEventListener('click', () => {
+          this.show();
+        });
       });
-    });
+    }
   }
 }
 
 /**
  * Initializes all the modal using trigger "scroll".
  */
-class ScrollModal extends Modal {
+class ScrollModal extends ManualModal {
   constructor(
     modal: IModal
   ) {
@@ -234,7 +236,7 @@ class ScrollModal extends Modal {
 /**
  * Initializes all the modal using trigger "timer".
  */
-class TimerModal extends Modal {
+class TimerModal extends ManualModal {
   constructor(modal: IModal) {
     super(modal);
 
