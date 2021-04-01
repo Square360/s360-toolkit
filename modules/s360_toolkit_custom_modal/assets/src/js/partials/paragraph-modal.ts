@@ -62,6 +62,7 @@ function modalTimeoutExpired(key: string) {
     }
   }
 }
+
 class Modal {
   public id: string | null;
   public element: HTMLElement;
@@ -187,9 +188,7 @@ class Modal {
  * Initializes all the modal using trigger "manual".
  */
 class ManualModal extends Modal {
-  constructor(
-    public modal: IModal
-  ) {
+  constructor(modal: IModal) {
     super(modal);
 
     const TRIGGER_BUTTONS = document.querySelectorAll(`[aria-controls="${ this.id }"]`);
@@ -208,9 +207,7 @@ class ManualModal extends Modal {
  * Initializes all the modal using trigger "scroll".
  */
 class ScrollModal extends ManualModal {
-  constructor(
-    modal: IModal
-  ) {
+  constructor(modal: IModal) {
     super(modal);
 
     if (modalTimeoutExpired(this.storageKey)) {
@@ -240,11 +237,52 @@ class TimerModal extends ManualModal {
   constructor(modal: IModal) {
     super(modal);
 
-    if (this.settings.timer_delay) {
-      setTimeout(() => {
-        this.show();
-      }, this.settings.timer_delay * 1000);
+    if (modalTimeoutExpired(this.storageKey)) {
+      if (this.settings.timer_delay) {
+        setTimeout(() => {
+          this.show();
+        }, this.settings.timer_delay * 1000);
+      }
     }
+  }
+}
+
+/**
+ * Initializes all the modal using trigger "exit_behaviour".
+ */
+class ExitBehaviourModal extends Modal {
+  constructor(modal: IModal) {
+    super(modal);
+
+    let lastPosition = {
+      x: -1,
+      y: -1
+    };
+
+    const move = (event) => {
+      if (modalTimeoutExpired(this.storageKey)) {
+        if (lastPosition.x !== -1) {
+          let deltaX = lastPosition.x - event.offsetX;
+          let deltaY = lastPosition.y - event.offsetY;
+
+          if (Math.abs(deltaY) > Math.abs(deltaX) && deltaY > 0) {
+            //upward movement
+            if (event.pageY <= 20) {
+              this.show();
+            }
+          }
+        }
+        lastPosition = {
+          x : event.offsetX,
+          y : event.offsetY
+        };
+      }
+      else {
+        document.removeEventListener('mousemove', move);
+      }
+    }
+
+    document.addEventListener('mousemove', move);
   }
 }
 
@@ -273,6 +311,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
       case 'timer':
         new TimerModal(modal);
+        break;
+
+      case 'google_optimize':
+        new Modal(modal);
+        break;
+
+      case 'exit_behaviour':
+        new ExitBehaviourModal(modal);
         break;
 
       default:
