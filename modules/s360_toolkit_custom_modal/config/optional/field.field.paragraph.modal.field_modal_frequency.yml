@@ -10,11 +10,13 @@ id: paragraph.modal.field_modal_frequency
 field_name: field_modal_frequency
 entity_type: paragraph
 bundle: modal
-label: Frequency
+label: 'Frequency of Repeat'
 description: 'How often a modal will re-display after being dismissed.'
-required: false
+required: true
 translatable: false
-default_value: {  }
+default_value:
+  -
+    value: 0
 default_value_callback: ''
 settings: {  }
 field_type: list_integer

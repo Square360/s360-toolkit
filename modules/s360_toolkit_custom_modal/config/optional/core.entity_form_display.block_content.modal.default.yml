@@ -13,7 +13,7 @@ mode: default
 content:
   field_par_modal:
     type: paragraphs
-    weight: 0
+    weight: 1
     settings:
       title: Modal
       title_plural: Modals
@@ -30,5 +30,12 @@ content:
         duplicate: duplicate
     third_party_settings: {  }
     region: content
-hidden:
-  info: true
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

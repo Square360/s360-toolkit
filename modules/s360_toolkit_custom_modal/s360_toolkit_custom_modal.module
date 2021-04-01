@@ -196,9 +196,6 @@ function s360_toolkit_custom_modal_field_widget_paragraphs_form_alter(&$element,
         'visible' => [
           'select[name*="[field_modal_trigger]"]' => ['value' => 'scroll'],
         ],
-        'required' => [
-          'select[name*="[field_modal_trigger]"]' => ['value' => 'scroll'],
-        ]
       ];
     }
 
@@ -207,15 +204,11 @@ function s360_toolkit_custom_modal_field_widget_paragraphs_form_alter(&$element,
         'visible' => [
           'select[name*="[field_modal_trigger]"]' => ['value' => 'timer'],
         ],
-        'required' => [
-          'select[name*="[field_modal_trigger]"]' => ['value' => 'timer'],
-        ]
       ];
     }
 
     if (isset($field_modal_banish_text)) {
-      $field_modal_banish_text['widget'] = reset($field_modal_banish_text['widget']);
-      $field_modal_banish_text['widget']['value']['#states'] = [
+      $field_modal_banish_text['widget'][0]['value']['#states'] = [
         'visible' => [
           'select[name*="[field_modal_frequency]"]' => ['!value' => -1],
           'or',
@@ -229,9 +222,6 @@ function s360_toolkit_custom_modal_field_widget_paragraphs_form_alter(&$element,
         'visible' => [
           'select[name*="[field_modal_trigger]"]' => ['!value' => 'manual'],
         ],
-        'required' => [
-          'select[name*="[field_modal_trigger]"]' => ['!value' => 'manual'],
-        ]
       ];
     }
   }
