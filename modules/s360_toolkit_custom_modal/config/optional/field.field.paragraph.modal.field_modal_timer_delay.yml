@@ -10,11 +10,13 @@ id: paragraph.modal.field_modal_timer_delay
 field_name: field_modal_timer_delay
 entity_type: paragraph
 bundle: modal
-label: 'Timer Delay'
+label: 'Timer Delay before the modal shows'
 description: 'How long after the page loads that he modal istriggered to display.'
-required: false
+required: true
 translatable: false
-default_value: {  }
+default_value:
+  -
+    value: 5
 default_value_callback: ''
 settings: {  }
 field_type: list_integer
