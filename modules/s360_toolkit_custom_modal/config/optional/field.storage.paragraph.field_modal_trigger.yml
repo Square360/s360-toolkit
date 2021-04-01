@@ -22,6 +22,9 @@ settings:
     -
       value: google_optimize
       label: 'From Google Optimize'
+    -
+      value: exit_behaviour
+      label: 'Exit Behaviour'
   allowed_values_function: ''
 module: options
 locked: false
