@@ -1,0 +1,41 @@
+.field--widget-layout-paragraphs {
+  // Force the field to be block rather than a table-cell.
+  .layout-paragraphs-field {
+    display: block !important;
+  }
+
+  // Force the inline labels to be flex.
+  .field--label-inline {
+    display: flex;
+    margin-bottom: .5em;
+
+    .field__label {
+      display: inline-block;
+      font-weight: bold;
+      margin-right: 1em;
+      color: #999999;
+      width: fit-content;
+      white-space: nowrap;
+      vertical-align: top;
+    }
+
+    // Adjust the `field__item` to display better.
+    .field__item {
+      display: inline-block;
+      vertical-align: top;
+      margin-right: 10px;
+
+      *:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+
+  // The dialog when selecting a layout.
+  [role='dialog'] {
+    top: 50% !important;
+    left: 50% !important;
+    width: 1024px !important;
+    transform: translate(-50%,-50%);
+  }
+}
