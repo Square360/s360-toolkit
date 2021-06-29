@@ -1,0 +1,13 @@
+.layout-paragraphs-add-content__toggle {
+  //
+  .fieldset-wrapper > &,
+  .layout-paragraphs-item > & {
+    margin-top: 0;
+    border: 4px solid #5d749c88;
+    transform: translateY(-50%);
+
+    &:hover {
+      border-color: #495b7a;
+    }
+  }
+}
