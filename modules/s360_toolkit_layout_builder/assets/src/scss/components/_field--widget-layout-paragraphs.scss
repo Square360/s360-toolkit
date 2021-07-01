@@ -8,6 +8,8 @@
   // Force the field to be block rather than a table-cell.
   .layout-paragraphs-field {
     display: block !important;
+    min-width: 1px;
+    max-width: 100%;
   }
 
   .fieldset-wrapper > .layout-paragraphs-add-content__toggle,
