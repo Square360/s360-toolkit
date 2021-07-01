@@ -1,7 +1,30 @@
 .field--widget-layout-paragraphs {
+  @import "./layout-paragraphs-actions";
+  @import "./layout-paragraphs-layout";
+  @import "./layout-paragraphs-layout-region";
+  @import "./layout-paragraphs-item";
+  @import "./layout-paragraphs-add-more-menu";
+
   // Force the field to be block rather than a table-cell.
   .layout-paragraphs-field {
     display: block !important;
+  }
+
+  .fieldset-wrapper > .layout-paragraphs-add-content__toggle,
+  .layout-paragraphs-item > .layout-paragraphs-add-content__toggle {
+    margin-top: 1;
+    border: 4px solid #5d749c88;
+    transform: translateY(-50%);
+    &:hover {
+      border-color: #495b7a;
+    }
+  }
+
+  .layout-paragraphs-layout-region > .layout-paragraphs-item > .layout-paragraphs-add-content__toggle {
+    border: 4px solid #ffa00e88;
+    &:hover {
+      border-color: #d9880c;
+    }
   }
 
   // Force the inline labels to be flex.
