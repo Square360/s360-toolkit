@@ -51,11 +51,8 @@ class HeaderFieldWidget extends LinkWidget {
     // Rename the title field's title.
     $element['title']['#title'] = 'Heading text';
 
-    // It's weird to see "<nolink>" in the uri field, so remove it and let the
-    // processFields function handle the empty value.
-    if ($element['uri']['#default_value'] === '<nolink>' || $element['uri']['#default_value'] === NULL) {
-      $element['uri']['#default_value'] = '';
-    }
+    // Make the title required based on the field.
+    $element['title']['#required'] = $element['#required'];
 
     // Start heading group.
     $element['text_group'] = [
@@ -74,6 +71,8 @@ class HeaderFieldWidget extends LinkWidget {
       '#options' => $semantic_tag_options,
       '#default_value' => $item->options['heading_tag'] ?? 'h2',
     ];
+
+    // Move the 'title' element into the text_group.
     $element['text_group']['title'] = $element['title'];
 
     $element['text_group']['subtitle'] = [
@@ -121,9 +120,10 @@ class HeaderFieldWidget extends LinkWidget {
     $element['options_group']['link_group'] = [
       '#type' => 'details',
       '#title' => t('Link options'),
-      '#open' => ($item->options['new_window'] || $element['uri']['#default_value'] !== '') ?? FALSE,
+      '#open' => ($item->options['new_window'] || $element['uri']['#default_value'] !== '<nolink>') ?? FALSE,
     ];
 
+    // Move the 'uri' element into the link_group.
     $element['options_group']['link_group']['uri'] = $element['uri'];
     $element['options_group']['link_group']['new_window'] = [
       '#title' => t('Open link in new window.'),
