@@ -4,7 +4,20 @@
   > .details-wrapper {
     border: 1px solid #999;
     margin-bottom: 1rem;
-    padding: 0;
+    padding: 1rem;
+
+    fieldset:not(.fieldgroup) {
+      padding: 0;
+
+      legend {
+        position: relative;
+        top: 0;
+      }
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
   }
 
   &__text-group {
