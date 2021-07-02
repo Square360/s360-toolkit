@@ -5,55 +5,59 @@ namespace Drupal\s360_toolkit_header_field\Plugin\Field\FieldFormatter;
 use Drupal\Core\Field\FieldItemInterface;
 use Drupal\Component\Utility\Html;
 use Drupal\link\Plugin\Field\FieldFormatter\LinkFormatter;
-use Drupal\s360_toolkit_header_field\Plugin\Field\FieldWidget\HeaderFieldWidget;
 
 /**
  * Base class for Header field formatters.
  */
-abstract class Base extends LinkFormatter {
+abstract class HeaderFieldFormatter extends LinkFormatter {
 
   /**
-   * Returns the class label based on the $selected_class key.
+   * Returns an array of classes for the header.
+   *
+   * @param array $options
+   *   The selected options for the header.
+   *
+   * @return array
+   *   The classes.
    */
-  protected function getClassLabel($selected_class) {
-    $allowed_classes = explode("\n", $this->getFieldSetting('allowed_classes'));
-    $allowed_classes = array_map('trim', $allowed_classes);
-    $allowed_classes = array_filter($allowed_classes, 'strlen');
+  protected function getHeaderClasses(array $options) {
+    $classes[] = 'sthf-header';
 
-    $classes = [];
+    if ($options['center']) {
+      $classes[] = 'sthf-header--centered';
+    }
 
-    foreach ($allowed_classes as $allowed_class) {
-      $matches = [];
+    if ($options['uppercase']) {
+      $classes[] = 'sthf-header--uppercase';
+    }
 
-      if (preg_match('/(.*)\|(.*)/', $allowed_class, $matches)) {
-        $key = trim($matches[1]);
-        $value = trim($matches[2]);
+    if ($options['size']) {
+      $classes[] = 'sthf-header--size-' . $options['size'];
+    }
+
+    if ($options['styles']) {
+      // Add a class for all styles.
+      foreach ($options['styles'] as $style) {
+        $classes[] = 'sthf-header--style-' . $style;
       }
-
-      $classes[$key] = $value;
     }
 
-    $available_classes = array_merge($classes, HeaderFieldWidget::HEADING_CLASSES, HeaderFieldWidget::ADDITIONAL_CLASSES);
+    // "visually-hidden" is a utility class so it doesn't need a BEM class name.
+    if ($options['visually_hidden']) {
+      $classes[] = 'visually-hidden';
+    }
 
-    if (array_key_exists($selected_class, $available_classes)) {
-      return $available_classes[$selected_class];
-    }
-    else {
-      return '';
-    }
+    return $classes;
   }
 
   /**
-   * Format the style class.
-   */
-  protected function formatClass(string $raw_classname) {
-    return ($raw_classname !== 'visually-hidden')
-      ? 'sthf-header--' . $raw_classname
-      : $raw_classname;
-  }
-
-  /**
-   * {@inheritdoc}
+   * Creates an array of header tags.
+   *
+   * @param Drupal\Core\Field\FieldItemInterface $item
+   *   The header field item.
+   *
+   * @return array
+   *   The array containing heading tag <h[2-6] /> and optinally the subtitle.
    */
   protected function getHeaderTags(FieldItemInterface $item) {
     $heading_text = Html::escape($item->title);

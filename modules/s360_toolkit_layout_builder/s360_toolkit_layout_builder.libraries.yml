@@ -2,4 +2,5 @@ s360_toolkit_layout_builder.admin:
   version: VERSION
   css:
     theme:
-      css/s360-toolkit-layout-builder.admin.css: {}
+      assets/dist/css/s360-toolkit-layout-builder.admin.min.css: {}
+      assets/dist/css/s360-toolkit-layout-builder.fontawesome.min.css: {}

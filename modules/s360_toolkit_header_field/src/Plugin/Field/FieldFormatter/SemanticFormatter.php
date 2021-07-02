@@ -16,7 +16,7 @@ use Drupal\Core\Field\FieldItemInterface;
  *   }
  * )
  */
-class SemanticFormatter extends Base {
+class SemanticFormatter extends HeaderFieldFormatter {
 
   /**
    * {@inheritdoc}
@@ -35,20 +35,13 @@ class SemanticFormatter extends Base {
    * {@inheritdoc}
    */
   private function viewValue(FieldItemInterface $item) {
-    $options = $item->options;
-
     if ($item->title) {
       // Create the <header /> tag.
       $header = [
         '#type' => 'html_tag',
         '#tag' => 'header',
         '#attributes' => [
-          'class' => [
-            'sthf-header',
-            ($options['center'] ? 'sthf-header--centered' : ''),
-            ($options['uppercase'] ? 'sthf-header--uppercase' : ''),
-            ($options['class'] ? $this->formatClass($options['class']) : ''),
-          ],
+          'class' => $this->getHeaderClasses($item->options),
         ],
       ];
 

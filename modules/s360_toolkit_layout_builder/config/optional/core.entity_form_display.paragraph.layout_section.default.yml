@@ -6,12 +6,19 @@ dependencies:
     - paragraphs.paragraphs_type.layout_section
   module:
     - s360_toolkit_header_field
-_core:
-  default_config_hash: gFSzmu2F5aAt4b_TllIU_3CH0uxyabvStz7reXYqCgA
 id: paragraph.layout_section.default
 targetEntityType: paragraph
 bundle: layout_section
 mode: default
-content: { }
+content: 
+  field_header:
+    type: header_field
+    weight: 0
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
 hidden:
-  field_header: true
+  created: true
+  status: true

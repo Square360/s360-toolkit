@@ -2,4 +2,4 @@ name: 'S360 Toolkit: Header Field'
 description: 'Provides a field type for heading text and optional subtitle.'
 type: module
 package: 'S360 Toolkit'
-core: 8.x
+core_version_requirement: ^8 || ^9
