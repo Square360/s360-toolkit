@@ -39,14 +39,13 @@ class StringFormatter extends HeaderFieldFormatter {
     $options = $item->options;
 
     $heading_tag = HeaderFieldItem::AVAILABLE_TAGS[$options['heading_tag']];
-    $class = $this->getClassLabel($options['class']);
 
     return [
       '#type' => 'inline_template',
       '#template' => '{{ value|nl2br }}',
       '#context' => [
         'value' => ($item->title !== '')
-        ? $heading_tag . ': ' . $item->title . ($class !== '' ? ' (' . $class . ')' : '')
+        ? $heading_tag . ': ' . $item->title
         : '',
       ],
     ];
