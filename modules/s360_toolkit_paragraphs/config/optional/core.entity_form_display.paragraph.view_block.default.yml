@@ -52,8 +52,6 @@ third_party_settings:
         formatter: closed
         required_fields: true
       label: Options
-_core:
-  default_config_hash: DatJfKF0--W2FiQ4sJg3c4d7LhMz0xianzW9MrgvQZc
 id: paragraph.view_block.default
 targetEntityType: paragraph
 bundle: view_block

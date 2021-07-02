@@ -8,8 +8,6 @@ dependencies:
     - paragraphs.paragraphs_type.view_block
   module:
     - s360_toolkit_header_field
-_core:
-  default_config_hash: jntTAM0mAj8K674AJWG5tItdaik27YF4l_Id4aTkvFo
 id: paragraph.view_block.preview
 targetEntityType: paragraph
 bundle: view_block

@@ -52,8 +52,6 @@ third_party_settings:
         formatter: closed
         required_fields: true
       label: Options
-_core:
-  default_config_hash: bi3qDRD9HF_yLoHuiLH1NUYxrCpaBxcF9F5TrAhFmyI
 id: paragraph.webform.default
 targetEntityType: paragraph
 bundle: webform
