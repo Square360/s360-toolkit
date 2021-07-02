@@ -17,7 +17,7 @@ use Drupal\s360_toolkit_header_field\Plugin\Field\FieldType\HeaderFieldItem;
  *   }
  * )
  */
-class StringFormatter extends Base {
+class StringFormatter extends HeaderFieldFormatter {
 
   /**
    * {@inheritdoc}

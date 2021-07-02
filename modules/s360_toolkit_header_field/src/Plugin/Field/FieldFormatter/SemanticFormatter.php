@@ -16,7 +16,7 @@ use Drupal\Core\Field\FieldItemInterface;
  *   }
  * )
  */
-class SemanticFormatter extends Base {
+class SemanticFormatter extends HeaderFieldFormatter {
 
   /**
    * {@inheritdoc}

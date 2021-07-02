@@ -16,7 +16,7 @@ use Drupal\Core\Field\FieldItemInterface;
  *   }
  * )
  */
-class GenericFormatter extends Base {
+class GenericFormatter extends HeaderFieldFormatter {
 
   /**
    * {@inheritdoc}
