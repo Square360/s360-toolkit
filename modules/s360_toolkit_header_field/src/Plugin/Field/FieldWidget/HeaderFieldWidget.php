@@ -20,19 +20,18 @@ use Drupal\s360_toolkit_header_field\Plugin\Field\FieldType\HeaderFieldItem;
  */
 class HeaderFieldWidget extends LinkWidget {
 
-  // Define all the heading classes.
-  const HEADING_CLASSES = [
-    'heading-2' => 'Heading 2',
-    'heading-3' => 'Heading 3',
-    'heading-4' => 'Heading 4',
-    'heading-5' => 'Heading 5',
-    'heading-6' => 'Heading 6',
+  // Define all the default sizes.
+  const DEFAULT_SIZES = [
+    'h1' => 'Heading 1',
+    'h2' => 'Heading 2',
+    'h3' => 'Heading 3',
+    'h4' => 'Heading 4',
+    'h5' => 'Heading 5',
+    'h6' => 'Heading 6',
   ];
 
-  // Define any additional classes that can be used.
-  const ADDITIONAL_CLASSES = [
-    'visually-hidden' => 'Visually Hidden',
-  ];
+  // Define all default styles.
+  const DEFAULT_STYLES = [];
 
   /**
    * {@inheritdoc}
@@ -96,24 +95,41 @@ class HeaderFieldWidget extends LinkWidget {
       '#title' => t('Display options'),
       '#open' => ($item->options['center'] || $item->options['uppercase'] || $item->options['class']) ?? FALSE,
     ];
+
+    $element['options_group']['display_group']['visually_hidden'] = [
+      '#title' => t('Visually Hidden'),
+      '#type' => 'checkbox',
+      '#default_value' => $item->options['visually_hidden'] ?? FALSE,
+      '#description' => t('When checked, the text will be hidden from display, but not screen readers.'),
+    ];
+
     $element['options_group']['display_group']['center'] = [
       '#title' => t('Center'),
       '#type' => 'checkbox',
       '#default_value' => $item->options['center'] ?? FALSE,
       '#description' => t('When checked, the text will be centered.'),
     ];
+
     $element['options_group']['display_group']['uppercase'] = [
       '#title' => 'Uppercase',
       '#type' => 'checkbox',
       '#default_value' => $item->options['uppercase'] ?? FALSE,
       '#description' => t('When checked, the text will be uppercased.'),
     ];
-    $element['options_group']['display_group']['class'] = [
-      '#title' => t('Style'),
+
+    $element['options_group']['display_group']['size'] = [
+      '#title' => t('Size'),
       '#type' => 'select',
-      '#options' => $this->getClassOptions(),
+      '#options' => $this->getSizeOptions(),
       '#empty_option' => t('- Select -'),
-      '#default_value' => $item->options['class'] ?? '',
+      '#default_value' => $item->options['size'] ?? '',
+    ];
+
+    $element['options_group']['display_group']['styles'] = [
+      '#title' => t('Styles'),
+      '#type' => 'checkboxes',
+      '#options' => $this->getStyleOptions(),
+      '#default_value' => $item->options['styles'] ?? [],
     ];
 
     // Start link group.
@@ -172,9 +188,13 @@ class HeaderFieldWidget extends LinkWidget {
 
     $values['options'] = [
       'heading_tag' => $element['text_group']['heading_tag']['#value'],
+
+      'visually_hidden' => $element['options_group']['display_group']['visually_hidden']['#value'],
       'center' => $element['options_group']['display_group']['center']['#value'],
       'uppercase' => $element['options_group']['display_group']['uppercase']['#value'],
-      'class' => $element['options_group']['display_group']['class']['#value'],
+      'size' => $element['options_group']['display_group']['size']['#value'],
+      'styles' => array_keys($element['options_group']['display_group']['styles']['#value']),
+
       'new_window' => $element['options_group']['link_group']['new_window']['#value'],
     ];
 
@@ -182,36 +202,65 @@ class HeaderFieldWidget extends LinkWidget {
   }
 
   /**
-   * Creates an array of available classes.
+   * Creates an array of available sizes.
    *
    * @return array
-   *   An associative array of available classes.
+   *   An associative array of available sizes.
    */
-  private function getClassOptions() {
-    $classes = [];
+  private function getSizeOptions() {
+    $size_options = [];
 
-    // Add the heading classes.
-    $classes = HeaderFieldWidget::HEADING_CLASSES;
+    // Add the DEFAULT_SIZES to $size_options array.
+    $size_options = HeaderFieldWidget::DEFAULT_SIZES;
 
-    $allowed_classes = explode("\n", $this->getFieldSetting('allowed_classes'));
-    $allowed_classes = array_map('trim', $allowed_classes);
-    $allowed_classes = array_filter($allowed_classes, 'strlen');
+    // Get the custom_sizes and apply some function to normalize them.
+    $custom_sizes = explode("\n", $this->getFieldSetting('custom_sizes'));
+    $custom_sizes = array_map('trim', $custom_sizes);
+    $custom_sizes = array_filter($custom_sizes, 'strlen');
 
-    foreach ($allowed_classes as $allowed_class) {
+    foreach ($custom_sizes as $custom_size) {
       $matches = [];
 
-      if (preg_match('/(.*)\|(.*)/', $allowed_class, $matches)) {
+      if (preg_match('/(.*)\|(.*)/', $custom_size, $matches)) {
         $key = trim($matches[1]);
         $value = trim($matches[2]);
       }
 
-      $classes[$key] = $value;
+      $size_options[$key] = $value;
     }
 
-    // Merge in the additional classes.
-    $classes = array_merge($classes, HeaderFieldWidget::ADDITIONAL_CLASSES);
+    return $size_options;
+  }
 
-    return $classes;
+  /**
+   * Creates an array of available styles.
+   *
+   * @return array
+   *   An associative array of available styles.
+   */
+  private function getStyleOptions() {
+    $style_options = [];
+
+    // Add the DEFAULT_STYLES to $style_options array.
+    $style_options = HeaderFieldWidget::DEFAULT_STYLES;
+
+    // Get the custom_styles and apply some function to normalize them.
+    $custom_styles = explode("\n", $this->getFieldSetting('custom_styles'));
+    $custom_styles = array_map('trim', $custom_styles);
+    $custom_styles = array_filter($custom_styles, 'strlen');
+
+    foreach ($custom_styles as $custom_style) {
+      $matches = [];
+
+      if (preg_match('/(.*)\|(.*)/', $custom_style, $matches)) {
+        $key = trim($matches[1]);
+        $value = trim($matches[2]);
+      }
+
+      $style_options[$key] = $value;
+    }
+
+    return $style_options;
   }
 
 }
