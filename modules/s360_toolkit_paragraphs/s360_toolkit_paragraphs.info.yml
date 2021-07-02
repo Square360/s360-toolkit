@@ -11,4 +11,4 @@ dependencies:
   - drupal:viewsreference
   - drupal:webform
   - square360:s360_toolkit
-core: 8.x
+core_version_requirement: ^8 || ^9

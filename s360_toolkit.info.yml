@@ -2,4 +2,4 @@ name: 'S360 Toolkit'
 description: 'Base module for custom ...'
 type: module
 package: 'S360 Toolkit'
-core: 8.x
+core_version_requirement: ^8 || ^9

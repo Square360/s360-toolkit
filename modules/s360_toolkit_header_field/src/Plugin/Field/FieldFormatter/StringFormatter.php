@@ -17,7 +17,7 @@ use Drupal\s360_toolkit_header_field\Plugin\Field\FieldType\HeaderFieldItem;
  *   }
  * )
  */
-class StringFormatter extends Base {
+class StringFormatter extends HeaderFieldFormatter {
 
   /**
    * {@inheritdoc}
@@ -39,14 +39,13 @@ class StringFormatter extends Base {
     $options = $item->options;
 
     $heading_tag = HeaderFieldItem::AVAILABLE_TAGS[$options['heading_tag']];
-    $class = $this->getClassLabel($options['class']);
 
     return [
       '#type' => 'inline_template',
       '#template' => '{{ value|nl2br }}',
       '#context' => [
         'value' => ($item->title !== '')
-        ? $heading_tag . ': ' . $item->title . ($class !== '' ? ' (' . $class . ')' : '')
+        ? $heading_tag . ': ' . $item->title
         : '',
       ],
     ];
