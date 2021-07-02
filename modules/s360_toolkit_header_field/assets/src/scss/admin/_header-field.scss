@@ -7,13 +7,6 @@
     padding: 1rem;
 
     fieldset:not(.fieldgroup) {
-      padding: 0;
-
-      legend {
-        position: relative;
-        top: 0;
-      }
-
       &:last-of-type {
         margin-bottom: 0;
       }

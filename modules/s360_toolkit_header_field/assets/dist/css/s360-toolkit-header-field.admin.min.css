@@ -1,7 +1,7 @@
 /*!
  * @client: Square360
  * @version: 1.0.0
- * @build: 2021-07-01 | 104051
+ * @build: 2021-07-02 | 074623
  */
 .header-field {
   width: 100%;
@@ -10,13 +10,6 @@
   border: 1px solid #999;
   margin-bottom: 1rem;
   padding: 1rem;
-}
-.header-field > .details-wrapper fieldset:not(.fieldgroup) {
-  padding: 0;
-}
-.header-field > .details-wrapper fieldset:not(.fieldgroup) legend {
-  position: relative;
-  top: 0;
 }
 .header-field > .details-wrapper fieldset:not(.fieldgroup):last-of-type {
   margin-bottom: 0;
