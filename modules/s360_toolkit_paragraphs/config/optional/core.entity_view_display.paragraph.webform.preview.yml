@@ -8,8 +8,6 @@ dependencies:
     - paragraphs.paragraphs_type.webform
   module:
     - s360_toolkit_header_field
-_core:
-  default_config_hash: CQSCbd5Wg-Xmdrcr0AOCagZo2IZlIVxRT8Wknf8uvko
 id: paragraph.webform.preview
 targetEntityType: paragraph
 bundle: webform
