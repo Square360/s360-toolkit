@@ -35,20 +35,13 @@ class GenericFormatter extends Base {
    * {@inheritdoc}
    */
   private function viewValue(FieldItemInterface $item) {
-    $options = $item->options;
-
     if ($item->title) {
       // Create the <div /> tag.
       $header = [
         '#type' => 'html_tag',
         '#tag' => 'div',
         '#attributes' => [
-          'class' => [
-            'sthf-header',
-            ($options['center'] ? 'sthf-header--centered' : ''),
-            ($options['uppercase'] ? 'sthf-header--uppercase' : ''),
-            ($options['class'] ? $this->formatClass($options['class']) : ''),
-          ],
+          'class' => $this->getHeaderClasses($item->options),
         ],
       ];
 

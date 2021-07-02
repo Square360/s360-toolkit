@@ -1,7 +1,7 @@
 /*!
  * @client: Square360
  * @version: 1.0.0
- * @build: 2021-03-24 | 083439
+ * @build: 2021-07-02 | 082657
  */
 .header-field {
   width: 100%;
@@ -9,7 +9,10 @@
 .header-field > .details-wrapper {
   border: 1px solid #999;
   margin-bottom: 1rem;
-  padding: 0;
+  padding: 1rem;
+}
+.header-field > .details-wrapper fieldset:not(.fieldgroup):last-of-type {
+  margin-bottom: 0;
 }
 .header-field__text-group {
   width: 100%;
@@ -31,15 +34,21 @@
 .header-field__options-group {
   width: 100%;
 }
-.header-field__options-group .fieldset-wrapper {
+.header-field__options-group > .fieldset-wrapper {
   display: -ms-grid;
   display: grid;
   gap: 20px;
   -ms-grid-columns: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
 }
-.header-field__options-group .fieldset-wrapper > * {
+.header-field__options-group > .fieldset-wrapper > * {
   margin-bottom: 0;
+}
+.header-field__options-group-styles .form-checkboxes {
+  display: -ms-grid;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 }
 
 /*# sourceMappingURL=s360-toolkit-header-field.admin.min.css.map*/
