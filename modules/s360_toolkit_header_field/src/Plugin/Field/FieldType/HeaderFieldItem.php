@@ -34,7 +34,8 @@ class HeaderFieldItem extends LinkItem {
    */
   public static function defaultStorageSettings() {
     return [
-      'allowed_classes' => '',
+      'custom_styles' => '',
+      'custom_sizes' => '',
     ] + parent::defaultStorageSettings();
   }
 
@@ -83,12 +84,20 @@ class HeaderFieldItem extends LinkItem {
   public function storageSettingsForm(array &$form, FormStateInterface $form_state, $has_data) {
     $element = parent::storageSettingsForm($form, $form_state, $has_data);
 
-    $element['allowed_classes'] = [
+    $element['custom_styles'] = [
       '#type' => 'textarea',
       '#rows' => 10,
-      '#default_value' => $this->getSetting('allowed_classes'),
-      '#title' => t('Allowed classes'),
-      '#description' => t('<p>Possible styles that can be applied to the header field. Enter one value per line, in the format <strong>class-name|label</strong>.</p><p>All class-names will be prefixed with "<strong>header-group--</strong>".') . '</p>',
+      '#default_value' => $this->getSetting('custom_styles'),
+      '#title' => t('Styles'),
+      '#description' => t('<p>Possible styles that can be applied to the header field. Enter one value per line, in the format <strong>name|label</strong>.</p><p>All names will be prefixed with "<strong>header-group--style-</strong>".') . '</p>',
+    ];
+
+    $element['custom_sizes'] = [
+      '#type' => 'textarea',
+      '#rows' => 10,
+      '#default_value' => $this->getSetting('custom_sizes'),
+      '#title' => t('Sizes'),
+      '#description' => t('<p>Possible styles that can be applied to the header field. Enter one value per line, in the format <strong>name|label</strong>.</p><p>All names will be prefixed with "<strong>header-group--size-</strong>".') . '</p>',
     ];
 
     return $element;
