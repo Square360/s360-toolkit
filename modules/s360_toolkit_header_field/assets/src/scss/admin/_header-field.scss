@@ -34,7 +34,7 @@
   &__options-group {
     width: 100%;
 
-    .fieldset-wrapper {
+    > .fieldset-wrapper {
       display: grid;
       gap: 20px;
       grid-template-columns: 1fr 1fr;
@@ -42,6 +42,12 @@
       > * {
         margin-bottom: 0;
       }
+    }
+
+    &-styles .form-checkboxes {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     }
   }
 }
