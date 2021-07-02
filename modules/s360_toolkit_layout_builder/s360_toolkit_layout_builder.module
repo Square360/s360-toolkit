@@ -65,7 +65,7 @@ function s360_toolkit_layout_builder_preprocess_paragraph__layout_section(&$vari
       if ($paragraph->hasField('field_header')) {
         $field_header = $paragraph->get('field_header');
 
-        if (!$field_header->isEmpty()) {
+        if ($field_header->first()->getValue()['title'] !== '') {
           $header = $field_header->view([
             'label' => 'hidden',
           ]);

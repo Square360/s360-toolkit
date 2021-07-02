@@ -6,14 +6,7 @@ dependencies:
     - field.field.paragraph.layout_section.field_header
     - paragraphs.paragraphs_type.layout_section
   module:
-    - layout_builder
     - s360_toolkit_header_field
-third_party_settings:
-  layout_builder:
-    allow_custom: false
-    enabled: false
-_core:
-  default_config_hash: g4OKIasWb3tb15bLZZ5odlB6gyl5gxtDhyv-xY3x-1E
 id: paragraph.layout_section.preview
 targetEntityType: paragraph
 bundle: layout_section
@@ -31,4 +24,4 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-hidden: {}
+hidden: {  }
