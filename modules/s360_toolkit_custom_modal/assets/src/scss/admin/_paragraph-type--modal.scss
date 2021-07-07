@@ -1,4 +1,14 @@
 .paragraph-type--modal {
+  .paragraph__modal-trigger-id {
+    font-size: 12/16+rem;
+    font-style: italic;
+    position: relative;
+    width: max-content;
+    padding: 0.5em 0.75em;
+    border: 1px solid #000000;
+    margin-top: 1em;
+  }
+
   .field--name-field-modal-position {
     .form-item {
       display: flex;
@@ -22,6 +32,5 @@
         }
       }
     }
-
   }
 }
