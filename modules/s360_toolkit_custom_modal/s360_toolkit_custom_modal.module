@@ -239,3 +239,30 @@ function s360_toolkit_custom_modal_theme_suggestions_block_alter(array &$suggest
     }
   }
 }
+
+/**
+ * Implements hook_form_field_ui_field_storage_add_form_alter().
+ */
+function s360_toolkit_custom_modal_form_field_ui_field_storage_add_form_alter(&$form, FormStateInterface $form_state) {
+  $modal_trigger_fields_to_hide = [
+    'field_modal_trigger_style',
+  ];
+
+  $modal_fields_to_hide = [
+    'field_modal_banish_text',
+    'field_modal_frequency',
+    'field_modal_header',
+    'field_modal_par_modal_layout',
+    'field_modal_position',
+    'field_modal_scroll_delay',
+    'field_modal_style',
+    'field_modal_timer_delay',
+    'field_modal_trigger',
+  ];
+
+  $fields_to_hide = array_merge($modal_trigger_fields_to_hide, $modal_fields_to_hide);
+
+  foreach($fields_to_hide as $field_to_hide) {
+    unset($form['add']['existing_storage_name']['#options'][$field_to_hide]);
+  }
+}
