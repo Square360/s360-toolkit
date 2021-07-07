@@ -1,8 +1,19 @@
 /*!
  * @client: Square360
  * @version: 1.0.0
- * @build: 2021-04-01 | 110006
+ * @build: 2021-07-07 | 090612
  */
+.paragraph-type--modal .paragraph__modal-trigger-id {
+  font-size: 0.75rem;
+  font-style: italic;
+  position: relative;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 0.5em 0.75em;
+  border: 1px solid #000000;
+  margin-top: 1em;
+}
 .paragraph-type--modal .field--name-field-modal-position .form-item {
   display: -webkit-box;
   display: -ms-flexbox;
