@@ -2,10 +2,12 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.paragraph.image.field_link
     - field.field.paragraph.image.field_med_image
     - paragraphs.paragraphs_type.image
   module:
     - field_group
+    - link
     - media_library
 third_party_settings:
   field_group:
@@ -38,6 +40,7 @@ third_party_settings:
       label: Media
     group_options:
       children:
+        - field_link
         - status
       parent_name: group_tabs_content_group
       weight: 21
@@ -55,6 +58,14 @@ targetEntityType: paragraph
 bundle: image
 mode: default
 content:
+  field_link:
+    weight: 22
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
   field_med_image:
     type: media_library_widget
     weight: 1
@@ -64,7 +75,7 @@ content:
     region: content
   status:
     type: boolean_checkbox
-    weight: 2
+    weight: 23
     region: content
     settings:
       display_label: true
