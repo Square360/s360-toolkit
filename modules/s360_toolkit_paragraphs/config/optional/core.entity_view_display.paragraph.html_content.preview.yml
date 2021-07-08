@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.html_content.field_body
+    - paragraphs.paragraphs_type.html_content
+  module:
+    - text
+id: paragraph.html_content.preview
+targetEntityType: paragraph
+bundle: html_content
+mode: preview
+content:
+  field_body:
+    type: text_default
+    weight: 0
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }
