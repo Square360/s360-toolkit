@@ -94,11 +94,11 @@ class HeaderFieldWidget extends LinkWidget {
       '#type' => 'details',
       '#title' => t('Display options'),
       '#open' => (
-        $item->options['visually_hidden'] ||
-        $item->options['center'] ||
-        $item->options['uppercase'] ||
-        $item->options['size'] ||
-        $item->options['styles']
+        (isset($item->options['visually_hidden']) && $item->options['visually_hidden']) ||
+        (isset($item->options['center']) && $item->options['center']) ||
+        (isset($item->options['uppercase']) && $item->options['uppercase']) ||
+        (isset($item->options['size']) && $item->options['size']) ||
+        (isset($item->options['styles']) && $item->options['styles'])
       ) ?? FALSE,
     ];
 
@@ -145,7 +145,7 @@ class HeaderFieldWidget extends LinkWidget {
       '#type' => 'details',
       '#title' => t('Link options'),
       '#open' => (
-        $item->options['new_window'] ||
+        (isset($item->options['new_window']) && $item->options['new_window']) ||
         $element['uri']['#default_value'] !== '<nolink>'
       ) ?? FALSE,
     ];
@@ -204,7 +204,9 @@ class HeaderFieldWidget extends LinkWidget {
       'center' => $element['options_group']['display_group']['center']['#value'],
       'uppercase' => $element['options_group']['display_group']['uppercase']['#value'],
       'size' => $element['options_group']['display_group']['size']['#value'],
-      'styles' => array_keys($element['options_group']['display_group']['styles']['#value']) ?? [],
+      'styles' => isset($element['options_group']['display_group']['styles'])
+      ? array_keys($element['options_group']['display_group']['styles']['#value'])
+      : [],
 
       'new_window' => $element['options_group']['link_group']['new_window']['#value'],
     ];
