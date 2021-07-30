@@ -93,7 +93,13 @@ class HeaderFieldWidget extends LinkWidget {
     $element['options_group']['display_group'] = [
       '#type' => 'details',
       '#title' => t('Display options'),
-      '#open' => ($item->options['center'] || $item->options['uppercase'] || $item->options['class']) ?? FALSE,
+      '#open' => (
+        $item->options['visually_hidden'] ||
+        $item->options['center'] ||
+        $item->options['uppercase'] ||
+        $item->options['size'] ||
+        $item->options['styles']
+      ) ?? FALSE,
     ];
 
     $element['options_group']['display_group']['visually_hidden'] = [
@@ -125,18 +131,23 @@ class HeaderFieldWidget extends LinkWidget {
       '#default_value' => $item->options['size'] ?? '',
     ];
 
-    $element['options_group']['display_group']['styles'] = [
-      '#title' => t('Styles'),
-      '#type' => 'checkboxes',
-      '#options' => $this->getStyleOptions(),
-      '#default_value' => $item->options['styles'] ?? [],
-    ];
+    if (count($this->getStyleOptions())) {
+      $element['options_group']['display_group']['styles'] = [
+        '#title' => t('Styles'),
+        '#type' => 'checkboxes',
+        '#options' => $this->getStyleOptions(),
+        '#default_value' => $item->options['styles'] ?? [],
+      ];
+    }
 
     // Start link group.
     $element['options_group']['link_group'] = [
       '#type' => 'details',
       '#title' => t('Link options'),
-      '#open' => ($item->options['new_window'] || $element['uri']['#default_value'] !== '<nolink>') ?? FALSE,
+      '#open' => (
+        $item->options['new_window'] ||
+        $element['uri']['#default_value'] !== '<nolink>'
+      ) ?? FALSE,
     ];
 
     // Move the 'uri' element into the link_group.
@@ -193,7 +204,7 @@ class HeaderFieldWidget extends LinkWidget {
       'center' => $element['options_group']['display_group']['center']['#value'],
       'uppercase' => $element['options_group']['display_group']['uppercase']['#value'],
       'size' => $element['options_group']['display_group']['size']['#value'],
-      'styles' => array_keys($element['options_group']['display_group']['styles']['#value']),
+      'styles' => array_keys($element['options_group']['display_group']['styles']['#value']) ?? [],
 
       'new_window' => $element['options_group']['link_group']['new_window']['#value'],
     ];
