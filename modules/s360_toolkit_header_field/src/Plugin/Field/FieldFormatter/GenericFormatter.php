@@ -51,9 +51,6 @@ class GenericFormatter extends HeaderFieldFormatter {
 
       return $header;
     }
-    else {
-      return FALSE;
-    }
   }
 
 }
