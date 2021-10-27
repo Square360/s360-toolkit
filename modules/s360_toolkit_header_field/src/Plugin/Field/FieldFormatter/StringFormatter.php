@@ -36,19 +36,21 @@ class StringFormatter extends HeaderFieldFormatter {
    * {@inheritdoc}
    */
   private function viewValue(FieldItemInterface $item) {
-    $options = $item->options;
+    if ($item->title) {
+      $options = $item->options;
 
-    $heading_tag = HeaderFieldItem::AVAILABLE_TAGS[$options['heading_tag']];
+      $heading_tag = HeaderFieldItem::AVAILABLE_TAGS[$options['heading_tag']];
 
-    return [
-      '#type' => 'inline_template',
-      '#template' => '{{ value|nl2br }}',
-      '#context' => [
-        'value' => ($item->title !== '')
-        ? $heading_tag . ': ' . $item->title
-        : '',
-      ],
-    ];
+      return [
+        '#type' => 'inline_template',
+        '#template' => '{{ value|nl2br }}',
+        '#context' => [
+          'value' => ($item->title !== '')
+          ? $heading_tag . ': ' . $item->title
+          : '',
+        ],
+      ];
+    }
   }
 
 }
