@@ -51,9 +51,6 @@ class SemanticFormatter extends HeaderFieldFormatter {
 
       return $header;
     }
-    else {
-      return FALSE;
-    }
   }
 
 }
