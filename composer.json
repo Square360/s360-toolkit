@@ -8,6 +8,5 @@
         "Layouts"
     ],
     "license": "GPL-2.0-or-later",
-    "minimum-stability": "dev",
-    "version": "4.0.4"
+    "minimum-stability": "dev"
 }
