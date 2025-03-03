@@ -37,7 +37,7 @@ function s360_toolkit_layout_builder_theme($existing, $type, $theme, $path) {
     'paragraph__layout_section' => [
       'template' => 'paragraph--layout-section' ,
       'base hook' => 'paragraph',
-      'path' => drupal_get_path('module', 's360_toolkit_layout_builder') . '/templates',
+      'path' => \Drupal::service('extension.list.module')->getPath('s360_toolkit_layout_builder') . '/templates',
     ],
   ];
 }
