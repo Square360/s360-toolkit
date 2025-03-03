@@ -6,9 +6,6 @@ use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Configurable one column layout plugin class.
- *
- * @internal
- *   Plugin classes are internal.
  */
 class S360TwoColumnLayout extends S360BaseLayout {
 

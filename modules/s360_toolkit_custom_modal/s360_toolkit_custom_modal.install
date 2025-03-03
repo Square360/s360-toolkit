@@ -11,7 +11,7 @@ use \Drupal\Core\Config\FileStorage;
  * Adds configuration using the modal paragraph inside a block.
  */
 function s360_toolkit_custom_modal_update_8001() {
-  $config_path = drupal_get_path('module', 's360_toolkit_custom_modal') . '/config/optional';
+  $config_path = \Drupal::service('extension.list.module')->getPath('s360_toolkit_custom_modal') . '/config/optional';
   $source = new FileStorage($config_path);
   $config_storage = \Drupal::service('config.storage');
 
